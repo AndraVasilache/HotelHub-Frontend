@@ -6,14 +6,12 @@ const HomeScreen = ({ navigation }) => {
 		<ImageBackground source={require('./../../assets/home.png')} style={styles.backgroundImage}>
 			<View style={styles.fixToText}>
         <TouchableOpacity 
-          //onPress={() => navigation.navigate('Signup')}
+          onPress={() => navigation.navigate('CreateAccount')}
           style={styles.button}>
           <Text style={styles.inputText}>
             Sign up
           </Text>
         </TouchableOpacity>
-
-       
 
 				<TouchableOpacity 
           onPress={() => navigation.navigate('Login')}
@@ -48,7 +46,7 @@ const styles = StyleSheet.create({
     width: 300,
     alignItems:"center",
     justifyContent:"center",
-    marginTop:40,
+    marginTop:20,
     marginBottom:10
   },
 });

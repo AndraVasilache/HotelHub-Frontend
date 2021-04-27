@@ -11,6 +11,7 @@ const LoginScreen = () => {
         placeholder={'Username'}
         style={styles.input}
       />
+      
       <TextInput
         //TODO
         //value={this.state.password}
