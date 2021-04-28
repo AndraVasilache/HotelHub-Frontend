@@ -1,7 +1,7 @@
 # HotelHub (Frontend)
 
 > Frontend repository of HotelHub app
-> For backend, see [this](https://github.com/lucigrigo/HotelHub) repository
+- For backend, see [this](https://github.com/lucigrigo/HotelHub) repository
 
 ## Installation
 
