@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, ImageBackground, View, TouchableOpacity, Text} from 'react-native';
 
-const AboutUsScreen = ({ navigation }) => {
+const AboutUsScreen = () => {
   return (
 		<ImageBackground source={require('./../../assets/home.jpg')} style={styles.backgroundImage}>
 		</ImageBackground>
