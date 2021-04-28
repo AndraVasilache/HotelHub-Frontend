@@ -3,7 +3,8 @@ import { StyleSheet, ImageBackground, View, TouchableOpacity, Text} from 'react-
 
 const AboutUsScreen = () => {
   return (
-		<ImageBackground source={require('./../../assets/home.jpg')} style={styles.backgroundImage}>
+		<ImageBackground source={require('./../../../assets/home.jpg')} style={styles.backgroundImage}>
+			
 		</ImageBackground>
 	);
 }

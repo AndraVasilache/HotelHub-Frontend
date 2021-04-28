@@ -4,7 +4,7 @@ import { StyleSheet, ImageBackground, View, TouchableOpacity, Text} from 'react-
 const HomeScreen = ({ navigation }) => {
 
   return (
-		<ImageBackground source={require('./../../assets/home.jpg')} style={styles.backgroundImage}>
+		<ImageBackground source={require('./../../../assets/home.jpg')} style={styles.backgroundImage}>
 			<View style={styles.fixToText}>
 
         <Text style={styles.defaultMessage}>

@@ -32,7 +32,7 @@ const SignUpScreen = ({ navigation }) => {
           //onPress={this.onLogin.bind(this)}
           style={styles.button}>
           <Text style={styles.inputText}>
-            Log in
+            Create account
           </Text>
         </TouchableOpacity>
     </View>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     backgroundColor:"#e34321",
     borderRadius:25,
     height:50,
-    width: 100,
+    width: 140,
     alignItems:"center",
     justifyContent:"center",
     marginTop:40,
