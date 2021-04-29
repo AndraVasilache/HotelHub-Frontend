@@ -1,29 +1,21 @@
 import React from 'react';
-import { TextInput, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { Button, TextInput, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
-const SignUpScreen = ({ navigation }) => {
-    const user = {}
+const SignUpScreen = () => {
   return (
     <View style={styles.container}>
       <TextInput
+        //TODO
         //value={this.state.username}
         //onChangeText={(username) => this.setState({ username })}
-        placeholder={'Email'}
+        placeholder={'Username'}
         style={styles.input}
       />
-
       <TextInput
+        //TODO
         //value={this.state.password}
         //onChangeText={(password) => this.setState({ password })}
         placeholder={'Password'}
-        secureTextEntry={true}
-        style={styles.input}
-      />
-
-      <TextInput
-        //value={this.state.password}
-        //onChangeText={(password) => this.setState({ password })}
-        placeholder={'Retype password'}
         secureTextEntry={true}
         style={styles.input}
       />
@@ -62,7 +54,7 @@ const styles = StyleSheet.create({
     backgroundColor:"#e34321",
     borderRadius:25,
     height:50,
-    width: 140,
+    width: 100,
     alignItems:"center",
     justifyContent:"center",
     marginTop:40,
