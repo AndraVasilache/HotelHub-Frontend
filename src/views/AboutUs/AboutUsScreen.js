@@ -4,7 +4,11 @@ import { StyleSheet, ImageBackground, View, TouchableOpacity, Text} from 'react-
 const AboutUsScreen = () => {
   return (
 		<ImageBackground source={require('./../../../assets/home.jpg')} style={styles.backgroundImage}>
-			
+			<View>
+				<Text>
+					HotelHub is a platform 
+				</Text>
+			</View>
 		</ImageBackground>
 	);
 }

@@ -1,28 +1,40 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { TextInput, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 const SignUpScreen = ({ navigation }) => {
-    const user = {}
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+    passwordCheck:''
+  });
+  console.log(user)
+
   return (
     <View style={styles.container}>
       <TextInput
-        //value={this.state.username}
-        //onChangeText={(username) => this.setState({ username })}
+        value={user.email}
+        onChangeText={(email) => setUser({email: email, 
+                                          password: user.password, 
+                                          passwordCheck: user.passwordCheck})}
         placeholder={'Email'}
         style={styles.input}
       />
 
       <TextInput
-        //value={this.state.password}
-        //onChangeText={(password) => this.setState({ password })}
+        value={user.password}
+        onChangeText={(password) => setUser({email: user.email, 
+                                            password: password,
+                                            passwordCheck: user.passwordCheck})}
         placeholder={'Password'}
         secureTextEntry={true}
         style={styles.input}
       />
 
       <TextInput
-        //value={this.state.password}
-        //onChangeText={(password) => this.setState({ password })}
+        value={user.passwordCheck}
+        onChangeText={(passwordCheck) => setUser({email: user.email, 
+                                            password: user.password,
+                                            passwordCheck: passwordCheck})}
         placeholder={'Retype password'}
         secureTextEntry={true}
         style={styles.input}

@@ -1,20 +1,24 @@
-import React from 'react';
-import { Button, TextInput, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import React, {useState} from 'react';
+import { TextInput, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 const LoginScreen = () => {
+  const [user, setUser] = useState({
+    username: '',
+    password: '',
+  });
+  console.log(user)
+  
   return (
     <View style={styles.container}>
       <TextInput
-        //TODO
-        //value={this.state.username}
-        //onChangeText={(username) => this.setState({ username })}
+        value={user.username}
+        onChangeText={(username) => setUser({username: username, password: user.password})}
         placeholder={'Username'}
         style={styles.input}
       />
       <TextInput
-        //TODO
-        //value={this.state.password}
-        //onChangeText={(password) => this.setState({ password })}
+        value={user.password}
+        onChangeText={(password) => setUser({username: user.username, password: password})}
         placeholder={'Password'}
         secureTextEntry={true}
         style={styles.input}
