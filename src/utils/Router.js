@@ -5,6 +5,7 @@ import LoginScreen from '../views/Login/LoginScreen';
 import AboutUsScreen from './../views/AboutUs/AboutUsScreen';
 import SignUpScreen from '../views/CreateAccount/SignUpScreen';
 import MakeReservation from '../views/MakeReservation/MakeReservation';
+import DebugScreen from '../views/DebugScreen';
 
 const Navigator = createStackNavigator(
   {
@@ -13,10 +14,11 @@ const Navigator = createStackNavigator(
     AboutUs: AboutUsScreen,
     CreateAccount: SignUpScreen,
     MakeReservation: MakeReservation,
+    Debug: DebugScreen,
     // Test: TestScreen
   },
   {
-    initialRouteName: 'MakeReservation',
+    initialRouteName: 'Debug',
     defaultNavigationOptions: {
       title: 'HotelHub',
     },
