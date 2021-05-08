@@ -13,18 +13,14 @@ const SignUpScreen = ({ navigation }) => {
     <View style={styles.container}>
       <TextInput
         value={user.email}
-        onChangeText={(email) => setUser({email: email, 
-                                          password: user.password, 
-                                          passwordCheck: user.passwordCheck})}
+        onChangeText={(email) => setUser({...user, email: email})}
         placeholder={'Email'}
         style={styles.input}
       />
 
       <TextInput
         value={user.password}
-        onChangeText={(password) => setUser({email: user.email, 
-                                            password: password,
-                                            passwordCheck: user.passwordCheck})}
+        onChangeText={(password) => setUser({...user, password: password})}
         placeholder={'Password'}
         secureTextEntry={true}
         style={styles.input}
@@ -32,9 +28,7 @@ const SignUpScreen = ({ navigation }) => {
 
       <TextInput
         value={user.passwordCheck}
-        onChangeText={(passwordCheck) => setUser({email: user.email, 
-                                            password: user.password,
-                                            passwordCheck: passwordCheck})}
+        onChangeText={(passwordCheck) => setUser({...user, passwordCheck: passwordCheck})}
         placeholder={'Retype password'}
         secureTextEntry={true}
         style={styles.input}
