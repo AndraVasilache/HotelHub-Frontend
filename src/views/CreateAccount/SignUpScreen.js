@@ -1,49 +1,7 @@
-import React, {useState} from 'react';
-import { TextInput, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
-
-const SignUpScreen = ({ navigation }) => {
-  const [user, setUser] = useState({
-    email: '',
-    password: '',
-    passwordCheck:''
-  });
-  console.log(user)
-
-  return (
-    <View style={styles.container}>
-      <TextInput
-        value={user.email}
-        onChangeText={(email) => setUser({...user, email: email})}
-        placeholder={'Email'}
-        style={styles.input}
-      />
-
-      <TextInput
-        value={user.password}
-        onChangeText={(password) => setUser({...user, password: password})}
-        placeholder={'Password'}
-        secureTextEntry={true}
-        style={styles.input}
-      />
-
-      <TextInput
-        value={user.passwordCheck}
-        onChangeText={(passwordCheck) => setUser({...user, passwordCheck: passwordCheck})}
-        placeholder={'Retype password'}
-        secureTextEntry={true}
-        style={styles.input}
-      />
-
-        <TouchableOpacity 
-          //onPress={this.onLogin.bind(this)}
-          style={styles.button}>
-          <Text style={styles.inputText}>
-            Create account
-          </Text>
-        </TouchableOpacity>
-    </View>
-  );
-};
+import React, { useState } from 'react';
+import {
+  TextInput, View, StyleSheet, TouchableOpacity, Text,
+} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -61,19 +19,62 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   inputText: {
-    color:"white"
+    color: 'white',
   },
-  button:{
-    width:"80%",
-    backgroundColor:"#e34321",
-    borderRadius:25,
-    height:50,
+  button: {
+    backgroundColor: '#e34321',
+    borderRadius: 25,
+    height: 50,
     width: 140,
-    alignItems:"center",
-    justifyContent:"center",
-    marginTop:40,
-    marginBottom:10
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+    marginBottom: 10,
   },
 });
+
+const SignUpScreen = () => {
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+    passwordCheck: '',
+  });
+
+  return (
+    <View style={styles.container}>
+      <TextInput
+        value={user.email}
+        onChangeText={(email) => setUser({ ...user, email })}
+        placeholder="Email"
+        style={styles.input}
+      />
+
+      <TextInput
+        value={user.password}
+        onChangeText={(password) => setUser({ ...user, password })}
+        placeholder="Password"
+        secureTextEntry
+        style={styles.input}
+      />
+
+      <TextInput
+        value={user.passwordCheck}
+        onChangeText={(passwordCheck) => setUser({ ...user, passwordCheck })}
+        placeholder="Retype password"
+        secureTextEntry
+        style={styles.input}
+      />
+
+      <TouchableOpacity
+        // onPress={this.onLogin.bind(this)}
+        style={styles.button}
+      >
+        <Text style={styles.inputText}>
+          Create account
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 export default SignUpScreen;
