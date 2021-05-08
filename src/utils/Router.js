@@ -12,7 +12,7 @@ const Navigator = createStackNavigator(
     Login: LoginScreen,
     AboutUs: AboutUsScreen,
     CreateAccount: SignUpScreen,
-    MakeReservation: MakeReservation
+    MakeReservation: MakeReservation,
     // Test: TestScreen
   },
   {
