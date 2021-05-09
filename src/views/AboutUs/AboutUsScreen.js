@@ -8,8 +8,6 @@ const backgroundImage = require('../../../assets/home.jpg');
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   textContainer: {
     flex: 1,
@@ -23,6 +21,15 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
+  },
+  coordinatorContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginBottom: 40,
+    marginLeft: 20,
+  },
+  coordinatorText: {
+    textAlign: 'left',
   },
 });
 
@@ -47,8 +54,8 @@ const AboutUsScreen = () => (
       </Text>
     </View>
 
-    <View>
-      <Text style={styles.text}>
+    <View style={styles.coordinatorContainer}>
+      <Text style={styles.coordinatorText}>
         Grigore Lucian-Florin
         {' \n'}
         Olteanu Eduard-Florin
