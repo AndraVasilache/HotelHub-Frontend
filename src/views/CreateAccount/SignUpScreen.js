@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  View, StyleSheet, TouchableOpacity, Text,
+  View, StyleSheet, TouchableOpacity, Text, KeyboardAvoidingView,
 } from 'react-native';
 import { TextInput, HelperText } from 'react-native-paper';
 
@@ -47,13 +47,15 @@ const SignUpScreen = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        label="First name"
-        value={user.surname}
-        autoFocus
-        onChangeText={(surname) => setUser({ ...user, surname })}
-      />
+      <KeyboardAvoidingView>
+        <TextInput
+          style={styles.input}
+          label="First name"
+          value={user.surname}
+          autoFocus
+          onChangeText={(surname) => setUser({ ...user, surname })}
+        />
+      </KeyboardAvoidingView>
 
       <TextInput
         style={styles.input}

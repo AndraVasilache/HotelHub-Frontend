@@ -4,7 +4,7 @@
   "packagerPort": 19000,
   "webpackServerPort": 19006,
   "packagerPid": null,
-  "expoServerNgrokUrl": "https://ib-3vt.anonymous.hotelhub-frontend.exp.direct",
-  "packagerNgrokUrl": "https://packager.ib-3vt.anonymous.hotelhub-frontend.exp.direct",
-  "ngrokPid": 16371
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo-google-fonts/playfair-display": "^0.1.0",
     "@react-native-community/datetimepicker": "^3.4.7",
     "@react-native-community/masked-view": "^0.1.10",
     "axios": "^0.21.1",
