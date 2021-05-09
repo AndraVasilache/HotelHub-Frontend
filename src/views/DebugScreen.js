@@ -5,7 +5,7 @@ const DebugScreen = ({ navigation }) => (
   <View>
     <Button
       title="StartScreen"
-      onPress={() => navigation.navigation('Start')}
+      onPress={() => navigation.navigate('Start')}
     />
 
     <Button
