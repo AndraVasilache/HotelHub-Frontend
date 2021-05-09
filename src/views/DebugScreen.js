@@ -1,8 +1,19 @@
 import * as React from 'react';
-import { View, Button } from 'react-native';
+import {
+  View, Button, StyleSheet, Text,
+} from 'react-native';
+
+const styles = StyleSheet.create({
+  fontTest: {
+    fontFamily: 'Itim_400Regular',
+    textAlign: 'center',
+    fontSize: 30,
+  },
+});
 
 const DebugScreen = ({ navigation }) => (
   <View>
+    <Text style={styles.fontTest}> Buna siua !</Text>
     <Button
       title="StartScreen"
       onPress={() => navigation.navigate('Start')}
