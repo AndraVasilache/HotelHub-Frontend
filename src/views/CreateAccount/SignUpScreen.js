@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import {
-  TextInput, View, StyleSheet, TouchableOpacity, Text,
+  View, StyleSheet, TouchableOpacity, Text,
 } from 'react-native';
+import { TextInput, HelperText } from 'react-native-paper';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
+    backgroundColor: 'white',
   },
   input: {
-    width: 200,
+    width: 300,
     height: 44,
     padding: 10,
-    borderWidth: 1,
-    borderColor: 'black',
     marginBottom: 10,
+    backgroundColor: 'white',
   },
   inputText: {
     color: 'white',
@@ -35,38 +35,67 @@ const styles = StyleSheet.create({
 
 const SignUpScreen = () => {
   const [user, setUser] = useState({
+    surname: '',
+    name: '',
     email: '',
     password: '',
     passwordCheck: '',
   });
 
+  const emailValidation = () => !user.email.includes('@');
+  const passwordValidation = () => !(user.passwordCheck === user.password);
+
   return (
     <View style={styles.container}>
       <TextInput
+        style={styles.input}
+        label="First name"
+        value={user.surname}
+        autoFocus
+        onChangeText={(surname) => setUser({ ...user, surname })}
+      />
+
+      <TextInput
+        style={styles.input}
+        label="Last name"
+        value={user.name}
+        onChangeText={(name) => setUser({ ...user, name })}
+      />
+
+      <TextInput
+        style={styles.input}
+        label="Email"
         value={user.email}
         onChangeText={(email) => setUser({ ...user, email })}
-        placeholder="Email"
-        style={styles.input}
       />
+      {user.email && emailValidation() ? (
+        <HelperText type="error" visible={emailValidation()}>
+          Email address is invalid!
+        </HelperText>
+      ) : null}
 
       <TextInput
+        style={styles.input}
+        label="Password"
+        secureTextEntry
         value={user.password}
         onChangeText={(password) => setUser({ ...user, password })}
-        placeholder="Password"
-        secureTextEntry
-        style={styles.input}
       />
 
       <TextInput
+        style={styles.input}
+        label="Retype password"
+        secureTextEntry
         value={user.passwordCheck}
         onChangeText={(passwordCheck) => setUser({ ...user, passwordCheck })}
-        placeholder="Retype password"
-        secureTextEntry
-        style={styles.input}
       />
+      {user.passwordCheck && passwordValidation() ? (
+        <HelperText type="error" visible={passwordValidation()}>
+          Passwords do not match!
+        </HelperText>
+      ) : null}
 
       <TouchableOpacity
-        // onPress={this.onLogin.bind(this)}
         style={styles.button}
       >
         <Text style={styles.inputText}>
