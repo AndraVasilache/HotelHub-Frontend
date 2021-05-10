@@ -10,10 +10,8 @@ export default class App extends React.Component {
   };
 
   async loadFonts() {
+    this.state.fontsLoaded = false;
     await Font.loadAsync({
-      // Load a font `Montserrat` from a static resource
-      Montserrat: require('./assets/fonts/Precious.ttf'),
-
       // Any string can be used as the fontFamily name. Here we use an object to provide more control
       'Precious': {
         uri: require('./assets/fonts/Precious.ttf'),
