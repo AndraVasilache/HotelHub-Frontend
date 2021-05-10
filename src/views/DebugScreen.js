@@ -9,11 +9,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 30,
   },
+  fontTest2: {
+    fontFamily: 'PlayfairDisplay_400Regular',
+    textAlign: 'center',
+    fontSize: 30,
+  },
 });
 
 const DebugScreen = ({ navigation }) => (
   <View>
     <Text style={styles.fontTest}> Buna siua !</Text>
+    <Text style={styles.fontTest2}> hello </Text>
     <Button
       title="StartScreen"
       onPress={() => navigation.navigate('Start')}
