@@ -35,21 +35,21 @@ const styles = StyleSheet.create({
 
 const LoginScreen = () => {
   const [user, setUser] = useState({
-    username: '',
+    email: '',
     password: '',
   });
 
   return (
     <View style={styles.container}>
       <TextInput
-        value={user.username}
-        onChangeText={(username) => setUser({ username, password: user.password })}
+        value={user.email}
+        onChangeText={(newEmail) => setUser({ email: newEmail, password: user.password })}
         placeholder="Username"
         style={styles.input}
       />
       <TextInput
         value={user.password}
-        onChangeText={(password) => setUser({ username: user.username, password })}
+        onChangeText={(password) => setUser({ email: user.email, password })}
         placeholder="Password"
         secureTextEntry
         style={styles.input}
