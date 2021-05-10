@@ -4,36 +4,41 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import * as Font from 'expo-font';
 import Router from './src/utils/Router';
 
-export default class App extends React.Component {
-  state = {
-    fontsLoaded: false,
-  };
+const preciousFont = require('./assets/fonts/Precious.ttf');
 
-  async loadFonts() {
-    this.state.fontsLoaded = false;
-    await Font.loadAsync({
-      // Any string can be used as the fontFamily name. Here we use an object to provide more control
-      'Precious': {
-        uri: require('./assets/fonts/Precious.ttf'),
-        display: Font.FontDisplay.FALLBACK,
-      },
-    });
-    this.setState({ fontsLoaded: true });
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...this.state,
+      fontsLoaded: false,
+    };
   }
 
   componentDidMount() {
     this.loadFonts();
   }
 
+  async loadFonts() {
+    this.state.fontsLoaded = false;
+    await Font.loadAsync({
+      Precious: {
+        uri: preciousFont,
+        display: Font.FontDisplay.FALLBACK,
+      },
+    });
+    this.setState({ fontsLoaded: true });
+  }
+
   render() {
-    if (this.state.fontsLoaded) {
+    const { fontsLoaded } = this.state;
+    if (fontsLoaded) {
       return (
         <PaperProvider>
           <Router />
         </PaperProvider>
       );
-    } else {
-      return null;
     }
+    return null;
   }
 }
