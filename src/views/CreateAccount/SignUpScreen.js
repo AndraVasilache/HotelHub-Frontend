@@ -22,13 +22,12 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   button: {
-    backgroundColor: '#e34321',
+    backgroundColor: '#1F3B3F',
     borderRadius: 25,
     height: 50,
-    width: 140,
+    width: 200,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40,
     marginBottom: 10,
   },
 });
@@ -52,58 +51,57 @@ const SignUpScreen = () => {
           style={styles.input}
           label="First name"
           value={user.surname}
-          autoFocus
           onChangeText={(surname) => setUser({ ...user, surname })}
         />
+
+        <TextInput
+          style={styles.input}
+          label="Last name"
+          value={user.name}
+          onChangeText={(name) => setUser({ ...user, name })}
+        />
+
+        <TextInput
+          style={styles.input}
+          label="Email"
+          value={user.email}
+          onChangeText={(email) => setUser({ ...user, email })}
+        />
+        {user.email && emailValidation() ? (
+          <HelperText type="error" visible={emailValidation()}>
+            Email address is invalid!
+          </HelperText>
+        ) : null}
+
+        <TextInput
+          style={styles.input}
+          label="Password"
+          secureTextEntry
+          value={user.password}
+          onChangeText={(password) => setUser({ ...user, password })}
+        />
+
+        <TextInput
+          style={styles.input}
+          label="Retype password"
+          secureTextEntry
+          value={user.passwordCheck}
+          onChangeText={(passwordCheck) => setUser({ ...user, passwordCheck })}
+        />
+        {user.passwordCheck && passwordValidation() ? (
+          <HelperText type="error" visible={passwordValidation()}>
+            Passwords do not match!
+          </HelperText>
+        ) : null}
+
       </KeyboardAvoidingView>
 
-      <TextInput
-        style={styles.input}
-        label="Last name"
-        value={user.name}
-        onChangeText={(name) => setUser({ ...user, name })}
-      />
-
-      <TextInput
-        style={styles.input}
-        label="Email"
-        value={user.email}
-        onChangeText={(email) => setUser({ ...user, email })}
-      />
-      {user.email && emailValidation() ? (
-        <HelperText type="error" visible={emailValidation()}>
-          Email address is invalid!
-        </HelperText>
-      ) : null}
-
-      <TextInput
-        style={styles.input}
-        label="Password"
-        secureTextEntry
-        value={user.password}
-        onChangeText={(password) => setUser({ ...user, password })}
-      />
-
-      <TextInput
-        style={styles.input}
-        label="Retype password"
-        secureTextEntry
-        value={user.passwordCheck}
-        onChangeText={(passwordCheck) => setUser({ ...user, passwordCheck })}
-      />
-      {user.passwordCheck && passwordValidation() ? (
-        <HelperText type="error" visible={passwordValidation()}>
-          Passwords do not match!
-        </HelperText>
-      ) : null}
-
-      <TouchableOpacity
-        style={styles.button}
-      >
+      <TouchableOpacity style={styles.button}>
         <Text style={styles.inputText}>
           Create account
         </Text>
       </TouchableOpacity>
+
     </View>
   );
 };
