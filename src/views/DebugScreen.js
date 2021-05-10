@@ -5,12 +5,11 @@ import {
 
 const styles = StyleSheet.create({
   fontTest: {
-    fontFamily: 'Itim_400Regular',
+    fontFamily: 'Precious',
     textAlign: 'center',
     fontSize: 30,
   },
   fontTest2: {
-    fontFamily: 'PlayfairDisplay_400Regular',
     textAlign: 'center',
     fontSize: 30,
   },
