@@ -44,6 +44,11 @@ const DebugScreen = ({ navigation }) => (
       title="MakeReservation"
       onPress={() => navigation.navigate('MakeReservation')}
     />
+
+    <Button
+      title="UserHome"
+      onPress={() => navigation.navigate('UserHome')}
+    />
   </View>
 );
 
