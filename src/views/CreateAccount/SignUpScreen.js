@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import {
-  View, StyleSheet, TouchableOpacity, Text, KeyboardAvoidingView,
+  View, StyleSheet, TouchableOpacity, Text,
 } from 'react-native';
 import { TextInput, HelperText } from 'react-native-paper';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const styles = StyleSheet.create({
-  container: {
+  containerView: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'white',
+  },
+  container: {
+    alignItems: 'center',
     backgroundColor: 'white',
   },
   input: {
@@ -45,8 +49,11 @@ const SignUpScreen = () => {
   const passwordValidation = () => !(user.passwordCheck === user.password);
 
   return (
-    <View style={styles.container}>
-      <KeyboardAvoidingView>
+    <View style={styles.containerView}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.container}
+        extraScrollHeight={40}
+      >
         <TextInput
           style={styles.input}
           label="First name"
@@ -94,13 +101,13 @@ const SignUpScreen = () => {
           </HelperText>
         ) : null}
 
-      </KeyboardAvoidingView>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.inputText}>
+            Create account
+          </Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.inputText}>
-          Create account
-        </Text>
-      </TouchableOpacity>
+      </KeyboardAwareScrollView>
 
     </View>
   );
