@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
 import {
-  TextInput, View, StyleSheet, TouchableOpacity, Text,
+  View, StyleSheet, TouchableOpacity, Text,
 } from 'react-native';
+import { TextInput, HelperText } from 'react-native-paper';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const styles = StyleSheet.create({
+  containerView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -11,59 +19,71 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   input: {
-    width: 200,
+    width: 300,
     height: 44,
     padding: 10,
-    borderWidth: 1,
-    borderColor: 'black',
     marginBottom: 10,
+    backgroundColor: 'white',
   },
   inputText: {
     color: 'white',
   },
   button: {
-    backgroundColor: '#e34321',
+    backgroundColor: '#1F3B3F',
     borderRadius: 25,
     height: 50,
-    width: 100,
+    width: 200,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40,
     marginBottom: 10,
   },
 });
 
-const LoginScreen = () => {
+const SignUpScreen = () => {
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
 
-  return (
-    <View style={styles.container}>
-      <TextInput
-        value={user.email}
-        onChangeText={(newEmail) => setUser({ email: newEmail, password: user.password })}
-        placeholder="Username"
-        style={styles.input}
-      />
-      <TextInput
-        value={user.password}
-        onChangeText={(password) => setUser({ email: user.email, password })}
-        placeholder="Password"
-        secureTextEntry
-        style={styles.input}
-      />
+  const emailValidation = () => !user.email.includes('@');
 
-      <TouchableOpacity
-        style={styles.button}
+  return (
+    <View style={styles.containerView}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.container}
+        extraScrollHeight={40}
       >
-        <Text style={styles.inputText}>
-          Log in
-        </Text>
-      </TouchableOpacity>
+
+        <TextInput
+          style={styles.input}
+          label="Email"
+          value={user.email}
+          onChangeText={(email) => setUser({ ...user, email })}
+        />
+        {user.email && emailValidation() ? (
+          <HelperText type="error" visible={emailValidation()}>
+            Email address is invalid!
+          </HelperText>
+        ) : null}
+
+        <TextInput
+          style={styles.input}
+          label="Password"
+          secureTextEntry
+          value={user.password}
+          onChangeText={(password) => setUser({ ...user, password })}
+        />
+
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.inputText}>
+            Log in
+          </Text>
+        </TouchableOpacity>
+
+      </KeyboardAwareScrollView>
+
     </View>
   );
 };
 
-export default LoginScreen;
+export default SignUpScreen;
