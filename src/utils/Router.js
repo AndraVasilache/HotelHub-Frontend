@@ -1,3 +1,4 @@
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import StartScreen from '../views/StartPage/StartScreen';
 import LoginScreen from '../views/Login/LoginScreen';
@@ -6,39 +7,43 @@ import SignUpScreen from '../views/CreateAccount/SignUpScreen';
 import ReservationScreen from '../views/MakeReservation/MakeReservation';
 import DebugScreen from '../views/DebugScreen';
 
-// const Navigator = createStackNavigator(
-//   {
-//     Start: StartScreen,
-//     Login: LoginScreen,
-//     AboutUs: AboutUsScreen,
-//     CreateAccount: SignUpScreen,
-//     MakeReservation: ReservationScreen,
-//     Debug: DebugScreen,
-//   },
-//   {
-//     initialRouteName: 'Debug',
-//     defaultNavigationOptions: {
-//       title: 'HotelHub',
-//     },
-//   },
-// );
-
 const Stack = createStackNavigator();
 
-const Router = () => (
-  <Stack.Navigator
-    initialRouteName="Home"
-    screenOptions={{ gestureEnabled: false }}
-  >
-    <Stack.Screen
-      name="Home"
-      component={HomeScreen}
-    />
-    <Stack.Screen
-      name="Profile"
-      component={ProfileScreen}
-    />
-  </Stack.Navigator>
-);
+function RootStack() {
+  return (
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen
+        name="Debug"
+        component={DebugScreen}
+      />
 
-export default Router;
+      <Stack.Screen
+        name="Start"
+        component={StartScreen}
+      />
+
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+      />
+
+      <Stack.Screen
+        name="CreateAccount"
+        component={SignUpScreen}
+      />
+
+      <Stack.Screen
+        name="AboutUs"
+        component={AboutUsScreen}
+      />
+
+      <Stack.Screen
+        name="MakeReservation"
+        component={ReservationScreen}
+      />
+
+    </Stack.Navigator>
+  );
+}
+
+export default RootStack;

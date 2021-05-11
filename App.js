@@ -1,6 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
 import Router from './src/utils/Router';
 
@@ -40,7 +41,9 @@ export default class App extends React.Component {
     if (fontsLoaded) {
       return (
         <PaperProvider>
-          <Router />
+          <NavigationContainer>
+            <Router />
+          </NavigationContainer>
         </PaperProvider>
       );
     }
