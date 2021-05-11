@@ -58,12 +58,11 @@ const SignUpScreen = () => {
   const emailValidation = () => !user.email.includes('@');
 
   return (
-    <View style={styles.containerView}>
-      <KeyboardAwareScrollView
-        contentContainerStyle={styles.container}
-        extraScrollHeight={40}
-      >
-
+    <KeyboardAwareScrollView
+      contentContainerStyle={styles.container}
+      extraScrollHeight={40}
+    >
+      <View style={styles.containerView}>
         <Avatar.Image size={100} source={defaultAvatar} style={styles.pictureStyle} />
 
         <TextInput
@@ -92,9 +91,9 @@ const SignUpScreen = () => {
           </Text>
         </TouchableOpacity>
 
-      </KeyboardAwareScrollView>
+      </View>
 
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 
