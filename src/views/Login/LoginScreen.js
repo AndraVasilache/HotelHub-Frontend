@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import {
   View, StyleSheet, TouchableOpacity, Text,
 } from 'react-native';
-import { TextInput, HelperText } from 'react-native-paper';
+import { TextInput, HelperText, Avatar } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+const defaultAvatar = require('../../../assets/defaultAvatar.png');
 
 const styles = StyleSheet.create({
   containerView: {
@@ -24,9 +26,11 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     backgroundColor: 'white',
+    fontFamily: 'Playfair',
   },
   inputText: {
     color: 'white',
+    fontFamily: 'Playfair',
   },
   button: {
     backgroundColor: '#1F3B3F',
@@ -36,6 +40,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
+    fontSize: 30,
+  },
+  pictureStyle: {
+    backgroundColor: 'white',
+    borderRadius: 0,
+    borderColor: 'transparent',
   },
 });
 
@@ -53,6 +63,8 @@ const SignUpScreen = () => {
         contentContainerStyle={styles.container}
         extraScrollHeight={40}
       >
+
+        <Avatar.Image size={100} source={defaultAvatar} style={styles.pictureStyle} />
 
         <TextInput
           style={styles.input}
