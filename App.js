@@ -5,6 +5,7 @@ import * as Font from 'expo-font';
 import Router from './src/utils/Router';
 
 const preciousFont = require('./assets/fonts/Precious.ttf');
+const playfairFont = require('./assets/fonts/PlayfairDisplay-Regular.ttf');
 
 export default class App extends React.Component {
   constructor(props) {
@@ -24,6 +25,10 @@ export default class App extends React.Component {
     await Font.loadAsync({
       Precious: {
         uri: preciousFont,
+        display: Font.FontDisplay.FALLBACK,
+      },
+      Playfair: {
+        uri: playfairFont,
         display: Font.FontDisplay.FALLBACK,
       },
     });

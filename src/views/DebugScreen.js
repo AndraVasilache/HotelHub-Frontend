@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   fontTest2: {
+    fontFamily: 'Playfair',
     textAlign: 'center',
     fontSize: 30,
   },
