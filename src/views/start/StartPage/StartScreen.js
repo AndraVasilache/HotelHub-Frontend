@@ -3,7 +3,7 @@ import {
   StyleSheet, ImageBackground, View, TouchableOpacity, Text,
 } from 'react-native';
 
-const backgroundImage = require('../../../assets/home.jpg');
+const backgroundImage = require('../../../../assets/home.jpg');
 
 const styles = StyleSheet.create({
   backgroundImage: {

@@ -2,23 +2,18 @@ import React, { useState } from 'react';
 import {
   View, StyleSheet, TouchableOpacity, Text,
 } from 'react-native';
-import { TextInput, HelperText, Avatar } from 'react-native-paper';
+import { TextInput, HelperText } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from 'axios';
-
-const defaultAvatar = require('../../../assets/defaultAvatar.png');
 
 const styles = StyleSheet.create({
   containerView: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: 'white',
   },
   container: {
-    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: 'white',
   },
   input: {
@@ -27,11 +22,9 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     backgroundColor: 'white',
-    fontFamily: 'Playfair',
   },
   inputText: {
     color: 'white',
-    fontFamily: 'Playfair',
   },
   button: {
     backgroundColor: '#1F3B3F',
@@ -41,36 +34,37 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
-    fontSize: 30,
-  },
-  pictureStyle: {
-    backgroundColor: 'white',
-    borderRadius: 0,
-    borderColor: 'transparent',
   },
 });
 
 const SignUpScreen = () => {
   const [user, setUser] = useState({
+    surname: '',
+    name: '',
     email: '',
     password: '',
+    passwordCheck: '',
   });
 
   const emailValidation = () => !user.email.includes('@');
+  const passwordValidation = () => !(user.passwordCheck === user.password);
 
-  function login() {
+  function register() {
     const options = {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       },
-      params: {
-        email: user.email,
-        password: user.password,
-      },
     };
 
-    axios.post('https://hotelhubip.herokuapp.com/users/login', null, options)
+    axios.post('https://hotelhubip.herokuapp.com/users/create', {
+      user_id: 0,
+      name: `${user.surname}${user.name}`,
+      email: user.email,
+      password: user.password,
+      is_admin: false,
+      hotel_admin: 0,
+    }, options)
       .then((response) => {
         console.log(response);
         return response;
@@ -81,12 +75,24 @@ const SignUpScreen = () => {
   }
 
   return (
-    <KeyboardAwareScrollView
-      contentContainerStyle={styles.container}
-      extraScrollHeight={40}
-    >
-      <View style={styles.containerView}>
-        <Avatar.Image size={100} source={defaultAvatar} style={styles.pictureStyle} />
+    <View style={styles.containerView}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.container}
+        extraScrollHeight={40}
+      >
+        <TextInput
+          style={styles.input}
+          label="First name"
+          value={user.surname}
+          onChangeText={(surname) => setUser({ ...user, surname })}
+        />
+
+        <TextInput
+          style={styles.input}
+          label="Last name"
+          value={user.name}
+          onChangeText={(name) => setUser({ ...user, name })}
+        />
 
         <TextInput
           style={styles.input}
@@ -108,18 +114,30 @@ const SignUpScreen = () => {
           onChangeText={(password) => setUser({ ...user, password })}
         />
 
+        <TextInput
+          style={styles.input}
+          label="Retype password"
+          secureTextEntry
+          value={user.passwordCheck}
+          onChangeText={(passwordCheck) => setUser({ ...user, passwordCheck })}
+        />
+        {user.passwordCheck && passwordValidation() ? (
+          <HelperText type="error" visible={passwordValidation()}>
+            Passwords do not match!
+          </HelperText>
+        ) : null}
+
         <TouchableOpacity
           style={styles.button}
-          onPress={() => login()}
+          onPress={() => register()}
         >
           <Text style={styles.inputText}>
-            Log in
+            Create account
           </Text>
         </TouchableOpacity>
+      </KeyboardAwareScrollView>
 
-      </View>
-
-    </KeyboardAwareScrollView>
+    </View>
   );
 };
 
