@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import {
   View, StyleSheet, TouchableOpacity, Text,
 } from 'react-native';
 import { TextInput, HelperText } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import axios from 'axios';
 
 const styles = StyleSheet.create({
   containerView: {
@@ -47,6 +48,28 @@ const SignUpScreen = () => {
 
   const emailValidation = () => !user.email.includes('@');
   const passwordValidation = () => !(user.passwordCheck === user.password);
+
+  function register() {
+    const options = {
+      headers: { 'Access-Control-Allow-Origin': '*' },
+    };
+
+    axios.post('https://hotelhubip.herokuapp.com/users/create', {
+      user_id: 0,
+      name: user.surname + user.name,
+      email: user.email,
+      password: useReducer.password,
+      is_admin: false,
+      hotel_admin: 0,
+    }, options)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   return (
     <View style={styles.containerView}>
@@ -101,12 +124,14 @@ const SignUpScreen = () => {
           </HelperText>
         ) : null}
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => register()}
+        >
           <Text style={styles.inputText}>
             Create account
           </Text>
         </TouchableOpacity>
-
       </KeyboardAwareScrollView>
 
     </View>
