@@ -51,5 +51,6 @@
     "assets": [
       "./assets/fonts/"
     ]
-  }
+  },
+  "proxy": "https://hotelhubip.herokuapp.com/"
 }

@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { TextInput, HelperText, Avatar } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import axios from 'axios';
 
 const defaultAvatar = require('../../../assets/defaultAvatar.png');
 
@@ -57,6 +58,28 @@ const SignUpScreen = () => {
 
   const emailValidation = () => !user.email.includes('@');
 
+  function login() {
+    const options = {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },
+      params: {
+        email: user.email,
+        password: user.password,
+      },
+    };
+
+    axios.post('https://hotelhubip.herokuapp.com/users/login', null, options)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <KeyboardAwareScrollView
       contentContainerStyle={styles.container}
@@ -85,7 +108,10 @@ const SignUpScreen = () => {
           onChangeText={(password) => setUser({ ...user, password })}
         />
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => login()}
+        >
           <Text style={styles.inputText}>
             Log in
           </Text>

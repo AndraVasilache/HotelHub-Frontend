@@ -1,10 +1,11 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState } from 'react';
 import {
   View, StyleSheet, TouchableOpacity, Text,
 } from 'react-native';
 import { TextInput, HelperText } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from 'axios';
+import hashUser from "../../utils/hashUser";
 
 const styles = StyleSheet.create({
   containerView: {
@@ -51,14 +52,17 @@ const SignUpScreen = () => {
 
   function register() {
     const options = {
-      headers: { 'Access-Control-Allow-Origin': '*' },
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },
     };
 
     axios.post('https://hotelhubip.herokuapp.com/users/create', {
       user_id: 0,
-      name: user.surname + user.name,
+      name: `${user.surname}${user.name}`,
       email: user.email,
-      password: useReducer.password,
+      password: user.password,
       is_admin: false,
       hotel_admin: 0,
     }, options)
