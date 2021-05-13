@@ -45,7 +45,7 @@ const Drawer = createDrawerNavigator();
 
 let user;
 
-const UserHome = ({ route }) => {
+const AdminHome = ({ route }) => {
   user = route.params.user;
   console.log(user);
 
@@ -57,4 +57,4 @@ const UserHome = ({ route }) => {
   );
 };
 
-export default UserHome;
+export default AdminHome;

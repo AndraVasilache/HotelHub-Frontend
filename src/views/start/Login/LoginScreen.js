@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const SignUpScreen = () => {
+const SignUpScreen = ({ navigation }) => {
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -73,6 +73,14 @@ const SignUpScreen = () => {
     axios.post('https://hotelhubip.herokuapp.com/users/login', null, options)
       .then((response) => {
         console.log(response);
+
+        const loginUser = response.data;
+        if (loginUser.admin === true) {
+          navigation.navigate('AdminHome', { user: loginUser });
+        } else {
+          navigation.navigate('UserHome', { user: loginUser });
+        }
+
         return response;
       })
       .catch((error) => {
