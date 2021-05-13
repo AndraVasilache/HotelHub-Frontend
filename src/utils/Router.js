@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 
 function RootStack() {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="Start">
       <Stack.Screen
         name="Debug"
         component={DebugScreen}

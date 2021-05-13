@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 const SignUpScreen = ({ navigation }) => {
   const [user, setUser] = useState({
     email: '',

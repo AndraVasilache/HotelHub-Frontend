@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 
 const DebugScreen = ({ navigation }) => (
   <View>
-    <Text style={styles.fontTest}> Buna siua !</Text>
+    <Text style={styles.fontTest}> Buna ziua !</Text>
     <Text style={styles.fontTest2}> Buna seara !</Text>
     <Button
       title="StartScreen"

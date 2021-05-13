@@ -21,6 +21,8 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
+    fontSize: 20,
+    fontFamily: 'Playfair',
   },
   coordinatorContainer: {
     flex: 1,
@@ -30,6 +32,8 @@ const styles = StyleSheet.create({
   },
   coordinatorText: {
     textAlign: 'left',
+    fontSize: 24,
+    fontFamily: 'Playfair',
   },
 });
 

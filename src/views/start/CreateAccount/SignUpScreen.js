@@ -37,7 +37,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const SignUpScreen = () => {
+const SignUpScreen = ({ navigation }) => {
+  const [badSignUp, setBadSignUp] = useState(false);
+
   const [user, setUser] = useState({
     surname: '',
     name: '',
@@ -67,6 +69,11 @@ const SignUpScreen = () => {
     }, options)
       .then((response) => {
         console.log(response);
+        if (response.data) {
+          navigation.navigate('Login');
+        } else {
+          setBadSignUp(true);
+        }
         return response;
       })
       .catch((error) => {
@@ -126,6 +133,10 @@ const SignUpScreen = () => {
             Passwords do not match!
           </HelperText>
         ) : null}
+
+        <HelperText type="error" visible={badSignUp}>
+          Email already in use!
+        </HelperText>
 
         <TouchableOpacity
           style={styles.button}
