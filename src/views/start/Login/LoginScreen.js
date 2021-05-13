@@ -50,11 +50,14 @@ const styles = StyleSheet.create({
   },
 });
 
+
 const SignUpScreen = ({ navigation }) => {
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
+
+  const [incorrectLogin, setIncorrectLogin] = useState(false);
 
   const emailValidation = () => !user.email.includes('@');
 
@@ -74,14 +77,17 @@ const SignUpScreen = ({ navigation }) => {
       .then((response) => {
         console.log(response);
 
+        if (response.data === '') {
+          setIncorrectLogin(true);
+          return;
+        }
+
         const loginUser = response.data;
         if (loginUser.admin === true) {
           navigation.navigate('AdminHome', { user: loginUser });
         } else {
           navigation.navigate('UserHome', { user: loginUser });
         }
-
-        return response;
       })
       .catch((error) => {
         console.log(error);
@@ -115,6 +121,10 @@ const SignUpScreen = ({ navigation }) => {
           value={user.password}
           onChangeText={(password) => setUser({ ...user, password })}
         />
+
+        <HelperText type="error" visible={incorrectLogin}>
+          Incorrect email or password!
+        </HelperText>
 
         <TouchableOpacity
           style={styles.button}

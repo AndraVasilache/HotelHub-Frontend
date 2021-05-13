@@ -7,9 +7,18 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 
+let user;
+
 function Feed({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text style={{ fontSize: 24 }}>
+        Hi admin,
+        { ' ' }
+        {user.email}
+        { ' ' }
+        !
+      </Text>
       <Text>Feed Screen</Text>
       <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
       <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
@@ -43,14 +52,12 @@ function CustomDrawerContent(props) {
 
 const Drawer = createDrawerNavigator();
 
-let user;
-
 const AdminHome = ({ route }) => {
   user = route.params.user;
   console.log(user);
 
   return (
-    <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
+    <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} user={user} />}>
       <Drawer.Screen name="Feed" component={Feed} />
       <Drawer.Screen name="Notifications" component={Notifications} />
     </Drawer.Navigator>
