@@ -54,8 +54,7 @@ function CustomDrawerContent(props) {
 const Drawer = createDrawerNavigator();
 
 const UserHome = ({ route }) => {
-  user = route.params.user;
-  console.log(user);
+  user = route.params.user || { email: '', password: '' };
 
   return (
     <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} user={user} />}>
