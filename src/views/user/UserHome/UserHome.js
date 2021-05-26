@@ -7,6 +7,9 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import HotelsPage from '../Hotels/HotelsPage';
+import Pending from '../Pending/PendingScreen';
+import Reservations from '../Reservations/ReservationsScreen';
 
 let user;
 
@@ -16,21 +19,12 @@ function Feed({ navigation }) {
       <Text style={{ fontSize: 24 }}>
         Hi user,
         { ' ' }
-        {user.email}
+        {user.name}
         { ' ' }
         !
       </Text>
       <Text>Feed Screen</Text>
-      <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
       <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
-    </View>
-  );
-}
-
-function Notifications() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Notifications Screen</Text>
     </View>
   );
 }
@@ -59,7 +53,9 @@ const UserHome = ({ route }) => {
   return (
     <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} user={user} />}>
       <Drawer.Screen name="Feed" component={Feed} />
-      <Drawer.Screen name="Notifications" component={Notifications} />
+      <Drawer.Screen name="Hotels" component={HotelsPage} initialParams={route.params} />
+      <Drawer.Screen name="Reservations" component={Reservations} initialParams={route.params} />
+      <Drawer.Screen name="Pending Reservations" component={Pending} initialParams={route.params} />
     </Drawer.Navigator>
   );
 };

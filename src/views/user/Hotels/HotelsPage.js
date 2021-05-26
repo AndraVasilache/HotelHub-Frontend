@@ -25,7 +25,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const HotelsPage = () => {
+const HotelsPage = ({ route }) => {
+  const user = (route && route.params && route.params.user) ? route.params.user : { email: '', password: '' };
+
   const list = [
     {
       name: 'hotel1',
@@ -69,6 +71,10 @@ const HotelsPage = () => {
         onChangeText={onChangeSearch}
         value={searchQuery}
       />
+      <Text>
+        test user mail:
+        {user.email}
+      </Text>
       <FlatList
         data={list}
         keyExtractor={(item) => item.name}
