@@ -7,6 +7,7 @@ import SignUpScreen from '../views/start/CreateAccount/SignUpScreen';
 import ReservationScreen from '../views/user/MakeReservation/MakeReservation';
 import UserHomeScreen from '../views/user/UserHome/UserHome';
 import AdminHomeScreen from '../views/admin/AdminHome/AdminHome';
+import HotelsScreen from '../views/user/Hotels/HotelsPage';
 import DebugScreen from '../views/DebugScreen';
 
 const Stack = createStackNavigator();
@@ -52,6 +53,11 @@ function RootStack() {
       <Stack.Screen
         name="AdminHome"
         component={AdminHomeScreen}
+      />
+
+      <Stack.Screen
+        name="Hotels"
+        component={HotelsScreen}
       />
 
     </Stack.Navigator>
