@@ -72,7 +72,7 @@ const SignUpScreen = ({ navigation }) => {
       },
     };
 
-    axios.post('https://hotelhubip.herokuapp.com/users/login', null, options)
+    axios.get('https://hotelhubip.herokuapp.com/users/login', null, options)
       .then((response) => {
         console.log(response);
 
