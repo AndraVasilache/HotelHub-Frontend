@@ -2,6 +2,7 @@ import React from 'react';
 import {
   StyleSheet, View, FlatList, Text, Image,
 } from 'react-native';
+import { Searchbar } from 'react-native-paper';
 
 const hotelImage = require('../../../../assets/hotel_avatar.png');
 
@@ -57,9 +58,17 @@ const HotelsPage = () => {
       location: 'location2',
     },
   ];
+  const [searchQuery, setSearchQuery] = React.useState('');
+
+  const onChangeSearch = (query) => setSearchQuery(query);
 
   return (
     <View>
+      <Searchbar
+        placeholder="Search a location"
+        onChangeText={onChangeSearch}
+        value={searchQuery}
+      />
       <FlatList
         data={list}
         keyExtractor={(item) => item.name}
@@ -75,7 +84,6 @@ const HotelsPage = () => {
               {' '}
               {item.location}
             </Text>
-
           </View>
         )}
       />
