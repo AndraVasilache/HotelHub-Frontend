@@ -11,7 +11,19 @@ const styles = StyleSheet.create({
   },
 });
 
-const MakeReservation = () => {
+// eslint-disable-next-line camelcase
+let hotel_id;
+
+let user;
+
+const MakeReservation = ({ route }) => {
+  // eslint-disable-next-line camelcase
+  hotel_id = (route.params && route.params.hotel_id) ? route.params.hotel_id : '';
+  user = (route && route.params && route.params.user) ? route.params.user : { email: '', password: '' };
+
+  console.log(hotel_id);
+  console.log(user);
+
   const [dates, setDates] = useState({
     startDate: null,
     endDate: null,

@@ -51,6 +51,11 @@ const HotelsPage = ({ route, navigation }) => {
       });
   }
 
+  // eslint-disable-next-line camelcase
+  function goToMakeReservation(hotel_id) {
+    navigation.navigate('MakeReservation', { hotel_id, user });
+  }
+
   if (hotels.length === 0) {
     getHotels();
   }
@@ -72,7 +77,7 @@ const HotelsPage = ({ route, navigation }) => {
       </Text>
       <FlatList
         data={hotels}
-        keyExtractor={(item) => item.name + item.location}
+        keyExtractor={(item) => item.hotel_id}
         renderItem={({ item }) => (
           <View style={styles.container}>
             <Image source={hotelImage} style={styles.image} />
@@ -85,7 +90,10 @@ const HotelsPage = ({ route, navigation }) => {
               {' '}
               {item.location}
             </Text>
-            <Button title="Make Reservation" />
+            <Button
+              title="Make Reservation"
+              onPress={() => goToMakeReservation(item.hotel_id)}
+            />
           </View>
         )}
       />

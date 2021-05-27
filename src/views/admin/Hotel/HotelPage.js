@@ -79,10 +79,6 @@ function HotelPage({ route, navigation }) {
     get();
   }
 
-  if (hotel !== '') {
-    console.log(hotel);
-  }
-
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
