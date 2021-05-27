@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  StyleSheet, View, FlatList, Text, Image,
+  StyleSheet, View, FlatList, Text, Image, Button,
 } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const HotelsPage = ({ route }) => {
+const HotelsPage = ({ route, navigation }) => {
   const user = (route && route.params && route.params.user) ? route.params.user : { email: '', password: '' };
 
   const list = [
@@ -66,6 +66,7 @@ const HotelsPage = ({ route }) => {
 
   return (
     <View>
+      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
       <Searchbar
         placeholder="Search a location"
         onChangeText={onChangeSearch}

@@ -51,7 +51,7 @@ const UserHome = ({ route }) => {
   user = (route && route.params && route.params.user) ? route.params.user : { email: '', password: '' };
 
   return (
-    <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} user={user} />}>
+    <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} user={user} initialRouteName="UserHome" />}>
       <Drawer.Screen name="Feed" component={Feed} />
       <Drawer.Screen name="Hotels" component={HotelsPage} initialParams={route.params} />
       <Drawer.Screen name="Reservations" component={Reservations} initialParams={route.params} />
