@@ -62,7 +62,6 @@ function HotelPage({ route, navigation }) {
       params: {
         user_id: user.user_id,
         hotel_id: user.hotel_admin,
-
       },
     };
 
