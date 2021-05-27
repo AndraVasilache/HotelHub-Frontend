@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 
-const defaultAvatar = require('../../../../assets/defaultAvatar.png');
+const hotelImage = require('../../../../assets/hotel_avatar.png');
 
 const styles = StyleSheet.create({
   container: {
@@ -65,7 +65,7 @@ function HotelPage({ route, navigation }) {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
       <View style={styles.container}>
-        <Image source={defaultAvatar} style={styles.image} />
+        <Image source={hotelImage} style={styles.image} />
         <Text style={styles.text}>
           Hotel
           {' '}

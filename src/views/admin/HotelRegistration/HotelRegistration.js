@@ -65,7 +65,7 @@ const HotelRegistration = ({ route, navigation }) => {
       params: { user_id: user.user_id },
     };
 
-    axios.put('https://hotelhubip.herokuapp.com/admin/actions/hotel/add',
+    axios.post('https://hotelhubip.herokuapp.com/admin/actions/hotel/add',
       hotel, registerOptions)
       .then((response) => {
         if (response.data === false) {
