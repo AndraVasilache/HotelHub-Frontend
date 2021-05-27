@@ -1,12 +1,37 @@
 import React, { useState } from 'react';
-import { View, Text, Button } from 'react-native';
+import {
+  View, Text, Button, Image, StyleSheet,
+} from 'react-native';
 import axios from 'axios';
+
+const defaultAvatar = require('../../../../assets/defaultAvatar.png');
+
+const styles = StyleSheet.create({
+  container: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontFamily: 'Playfair',
+    paddingBottom: 10,
+  },
+  image: {
+    width: 250,
+    height: 250,
+    alignSelf: 'center',
+  },
+  text: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontFamily: 'Playfair',
+  },
+});
 
 function HotelPage({ route, navigation }) {
   const user = (route && route.params && route.params.user) ? route.params.user : { email: '', password: '' };
-  const [hotel, setHotel] = useState(undefined);
+  const [hotel, setHotel] = useState({
+    location: '', name: '', photo: '', id: '',
+  });
 
-  function get(user) {
+  function get() {
     const options = {
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -28,16 +53,30 @@ function HotelPage({ route, navigation }) {
       });
   }
 
-  if (hotel == undefined) {
-    console.log(hotel);
-    get(user);
+  if (hotel.id === '') {
+    get();
+  }
+
+  if (hotel !== '') {
     console.log(hotel);
   }
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
-      <Text>Hotel</Text>
+      <View style={styles.container}>
+        <Image source={defaultAvatar} style={styles.image} />
+        <Text style={styles.text}>
+          Hotel
+          {' '}
+          {hotel.name}
+          {' \n'}
+          Location:
+          {' '}
+          {hotel.location}
+        </Text>
+        <Button title="Delete Hotel" />
+      </View>
     </View>
   );
 }
