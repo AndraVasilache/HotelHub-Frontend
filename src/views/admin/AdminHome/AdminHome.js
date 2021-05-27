@@ -55,8 +55,8 @@ const AdminHome = ({ navigation, route }) => {
     <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} user={user} initialRouteName="UserHome" />}>
       <Drawer.Screen name="Feed" component={Feed} />
       <Drawer.Screen name="Hotel" component={HotelPage} initialParams={route.params} />
-      {/* <Drawer.Screen name="Rooms" component={Rooms} initialParams={route.params} />
-      <Drawer.Screen name="Bookings" component={Bookingscreen} initialParams={route.params} /> */}
+      <Drawer.Screen name="Rooms" component={Rooms} initialParams={route.params} />
+      <Drawer.Screen name="Bookings" component={Bookingscreen} initialParams={route.params} />
     </Drawer.Navigator>
   );
 };
