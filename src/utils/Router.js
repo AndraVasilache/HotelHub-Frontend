@@ -9,6 +9,7 @@ import UserHomeScreen from '../views/user/UserHome/UserHome';
 import AdminHomeScreen from '../views/admin/AdminHome/AdminHome';
 import HotelsScreen from '../views/user/Hotels/HotelsPage';
 import DebugScreen from '../views/DebugScreen';
+import HotelRegistration from '../views/admin/HotelRegistration/HotelRegistration';
 
 const Stack = createStackNavigator();
 
@@ -58,6 +59,11 @@ function RootStack() {
       <Stack.Screen
         name="Hotels"
         component={HotelsScreen}
+      />
+
+      <Stack.Screen
+        name="HotelRegistration"
+        component={HotelRegistration}
       />
 
     </Stack.Navigator>

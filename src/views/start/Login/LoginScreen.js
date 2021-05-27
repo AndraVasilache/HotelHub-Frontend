@@ -66,24 +66,26 @@ const SignUpScreen = ({ navigation }) => {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       },
-      params: {
-        email: user.email,
-        password: user.password,
-      },
+      params: user,
     };
 
     axios.get('https://hotelhubip.herokuapp.com/users/login', options)
       .then((response) => {
-        console.log(response);
-
         if (response.data === '') {
           setIncorrectLogin(true);
           return;
         }
 
         const loginUser = response.data;
+
+        console.log(loginUser);
         if (loginUser.admin === true) {
-          navigation.navigate('AdminHome', { user: loginUser });
+          console.log(loginUser.hotel_admin !== 0);
+          if (loginUser.hotel_admin && loginUser.hotel_admin !== '') { // TODO: schimba cu string
+            navigation.navigate('AdminHome', { user: loginUser });
+          } else {
+            navigation.navigate('HotelRegistration', { user: loginUser });
+          }
         } else {
           navigation.navigate('UserHome', { user: loginUser });
         }

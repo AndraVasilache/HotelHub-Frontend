@@ -60,12 +60,11 @@ const SignUpScreen = ({ navigation }) => {
     };
 
     axios.post('https://hotelhubip.herokuapp.com/users/create', {
-      user_id: 0,
       name: `${user.surname}${user.name}`,
       email: user.email,
       password: user.password,
-      is_admin: false,
-      hotel_admin: 0,
+      admin: false,
+      hotel_admin: '',
     }, options)
       .then((response) => {
         console.log(response);
