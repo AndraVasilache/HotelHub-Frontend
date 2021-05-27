@@ -67,6 +67,7 @@ const HotelsPage = ({ route, navigation }) => {
   return (
     <View>
       <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
+
       <Searchbar
         placeholder="Search a location"
         onChangeText={onChangeSearch}
@@ -91,6 +92,7 @@ const HotelsPage = ({ route, navigation }) => {
               {' '}
               {item.location}
             </Text>
+            <Button title="Make Reservation" />
           </View>
         )}
       />

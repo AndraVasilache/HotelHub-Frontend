@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const AboutUsScreen = () => {
+const MakeReservation = () => {
   const [text, setText] = React.useState('');
 
   return (
@@ -50,4 +50,4 @@ const AboutUsScreen = () => {
   );
 };
 
-export default AboutUsScreen;
+export default MakeReservation;
