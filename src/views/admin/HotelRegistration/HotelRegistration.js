@@ -50,13 +50,13 @@ const styles = StyleSheet.create({
 
 const HotelRegistration = ({ route, navigation }) => {
   const user = (route && route.params && route.params.user) ? route.params.user : { email: '', password: '' };
-  const [hotel, setHotel] = useState({});
+  const [hotel, setHotel] = useState({
+    location: '', name: '', photo: '', id: '',
+  });
 
   const [incorrectRegistration, setIncorrectRegistration] = useState(false);
 
   function registration() {
-    const hotelCopy = { ...hotel };
-
     const registerOptions = {
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -66,7 +66,7 @@ const HotelRegistration = ({ route, navigation }) => {
     };
 
     axios.put('https://hotelhubip.herokuapp.com/admin/actions/hotel/add',
-      hotelCopy, registerOptions)
+      hotel, registerOptions)
       .then((response) => {
         if (response.data === false) {
           setIncorrectRegistration(true);
