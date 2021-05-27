@@ -6,7 +6,7 @@ import { TextInput, HelperText, Avatar } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from 'axios';
 
-const hotelImage = require('../../../../assets/hotel_avatar.png');
+const defaultAvatar = require('../../../../assets/defaultAvatar.png');
 
 const styles = StyleSheet.create({
   containerView: {
@@ -101,7 +101,7 @@ const SignUpScreen = ({ navigation }) => {
       extraScrollHeight={40}
     >
       <View style={styles.containerView}>
-        <Avatar.Image size={100} source={hotelImage} style={styles.pictureStyle} />
+        <Avatar.Image size={100} source={defaultAvatar} style={styles.pictureStyle} />
 
         <TextInput
           style={styles.input}
