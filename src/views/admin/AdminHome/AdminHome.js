@@ -7,6 +7,9 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import HotelPage from '../Hotel/HotelPage';
+import Bookingscreen from '../Bookings/BookingScreen';
+import Rooms from '../Rooms/HotelRooms';
 
 let user;
 
@@ -16,21 +19,12 @@ function Feed({ navigation }) {
       <Text style={{ fontSize: 24 }}>
         Hi admin,
         { ' ' }
-        {user.email}
+        {user.name}
         { ' ' }
         !
       </Text>
       <Text>Feed Screen</Text>
-      <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
       <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
-    </View>
-  );
-}
-
-function Notifications() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Notifications Screen</Text>
     </View>
   );
 }
@@ -53,14 +47,16 @@ function CustomDrawerContent(props) {
 
 const Drawer = createDrawerNavigator();
 
-const AdminHome = ({ route }) => {
+const AdminHome = ({ navigation, route }) => {
+  console.log(navigation);
   user = (route && route.params && route.params.user) ? route.params.user : { email: '', password: '' };
   console.log(user);
-
   return (
-    <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} user={user} />}>
+    <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} user={user} initialRouteName="UserHome" />}>
       <Drawer.Screen name="Feed" component={Feed} />
-      <Drawer.Screen name="Notifications" component={Notifications} />
+      <Drawer.Screen name="Hotel" component={HotelPage} initialParams={route.params} />
+      {/* <Drawer.Screen name="Rooms" component={Rooms} initialParams={route.params} />
+      <Drawer.Screen name="Bookings" component={Bookingscreen} initialParams={route.params} /> */}
     </Drawer.Navigator>
   );
 };
