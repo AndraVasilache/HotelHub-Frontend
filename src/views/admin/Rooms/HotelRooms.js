@@ -5,6 +5,8 @@ import {
 import { Searchbar } from 'react-native-paper';
 import axios from 'axios';
 
+import Modal from 'react-native-modal';
+
 const hotelImage = require('../../../../assets/hotel_avatar.png');
 
 const styles = StyleSheet.create({
@@ -24,12 +26,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'Playfair',
   },
+  modal: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
 });
 
 const Rooms = ({ route, navigation }) => {
   const user = (route && route.params && route.params.user) ? route.params.user : { email: '', password: '' };
   const [rooms, setRooms] = useState([]);
+  const [isModalVisible, setModalVisible] = useState(false);
   const [searchQuery, setSearchQuery] = React.useState('');
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   function getRooms() {
     const options = {
@@ -82,33 +93,49 @@ const Rooms = ({ route, navigation }) => {
 
   return (
     <View>
-      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
-      <Button title="Add room" />
+      {isModalVisible
+      && (
+      <Modal isVisible={isModalVisible} style={styles.modal}>
+        <View>
+          <Text>Hello!</Text>
 
-      <Searchbar
-        placeholder="Search a location"
-        onChangeText={onChangeSearch}
-        value={searchQuery}
-      />
-      <FlatList
-        data={rooms}
-        keyExtractor={(item) => item.room_id}
-        renderItem={({ item }) => (
-          <View style={styles.container}>
-            <Image source={hotelImage} style={styles.image} />
-            <Text style={styles.text}>
-              Room
-              {' '}
-              {item.name}
-              {' \n'}
-              Price:
-              {' '}
-              {item.price}
-            </Text>
-            <Button title="Delete room" onPress={() => deleteRoom(item)} />
-          </View>
-        )}
-      />
+          <Button title="Hide modal" onPress={toggleModal} />
+        </View>
+      </Modal>
+      )}
+
+      {!isModalVisible
+      && (
+      <View>
+        <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
+        <Button title="Add room" onPress={() => toggleModal()} />
+
+        <Searchbar
+          placeholder="Search a location"
+          onChangeText={onChangeSearch}
+          value={searchQuery}
+        />
+        <FlatList
+          data={rooms}
+          keyExtractor={(item) => item.room_id}
+          renderItem={({ item }) => (
+            <View style={styles.container}>
+              <Image source={hotelImage} style={styles.image} />
+              <Text style={styles.text}>
+                Room
+                {' '}
+                {item.name}
+                {' \n'}
+                Price:
+                {' '}
+                {item.price}
+              </Text>
+              <Button title="Delete room" onPress={() => deleteRoom(item)} />
+            </View>
+          )}
+        />
+      </View>
+      )}
     </View>
   );
 };
