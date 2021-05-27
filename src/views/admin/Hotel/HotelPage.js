@@ -53,6 +53,29 @@ function HotelPage({ route, navigation }) {
       });
   }
 
+  function deleteHotel() {
+    const options = {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },
+      params: {
+        user_id: user.user_id,
+        hotel_id: user.hotel_admin,
+
+      },
+    };
+
+    axios.get('https://hotelhubip.herokuapp.com//admin/actions/hotel/delete', options)
+      .then((response) => {
+        console.log(response);
+        navigation.popToTop();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   if (hotel.id === '') {
     get();
   }
@@ -75,7 +98,7 @@ function HotelPage({ route, navigation }) {
           {' '}
           {hotel.location}
         </Text>
-        <Button title="Delete Hotel" />
+        <Button title="Delete Hotel" onPress={deleteHotel} />
       </View>
     </View>
   );
