@@ -1,51 +1,34 @@
-import React from 'react';
-import {
-  StyleSheet, View, TouchableOpacity, Text,
-} from 'react-native';
-import { TextInput } from 'react-native-paper';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+import moment from 'moment';
+import DateRangePicker from 'react-native-daterange-picker';
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#fff',
+    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
-  },
-  input: {
-    width: 300,
-    height: 44,
-    padding: 10,
-    marginBottom: 10,
-    backgroundColor: 'white',
   },
 });
 
 const MakeReservation = () => {
-  const [text, setText] = React.useState('');
+  const [dates, setDates] = useState({
+    startDate: null,
+    endDate: null,
+    displayedDate: moment(),
+  });
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        label="Email"
-        value={text}
-        underlineColor="#e34321"
-        onChangeText={(newText) => setText(newText)}
-      />
-
-      <TextInput
-        style={styles.input}
-        label="Whatever"
-        value={text}
-        underlineColor="#e34321"
-        onChangeText={(newText) => setText(newText)}
-      />
-
-      <TouchableOpacity
-        style={styles.button}
+      <DateRangePicker
+        onChange={(newDate) => console.log(newDate)}
+        endDate={dates.endDate}
+        startDate={dates.startDate}
+        displayedDate={dates.displayedDate}
+        range
       >
-        <Text style={styles.inputText}>
-          Create account
-        </Text>
-      </TouchableOpacity>
+        <Text>Click me!</Text>
+      </DateRangePicker>
     </View>
   );
 };
