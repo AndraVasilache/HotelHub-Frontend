@@ -26,9 +26,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'Playfair',
   },
-  modal: {
-    flex: 1,
-    backgroundColor: 'white',
+  button: {
+    backgroundColor: '#1F3B3F',
+    borderRadius: 25,
+    height: 50,
+    width: 200,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+    fontSize: 30,
   },
 });
 
