@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet, View, FlatList, Text, Image, Button,
+  StyleSheet, View, FlatList, Text,
 } from 'react-native';
-import { Searchbar } from 'react-native-paper';
+import {
+  Searchbar, Card, Paragraph, Button,
+} from 'react-native-paper';
+
 import axios from 'axios';
 
 const hotelImage = require('../../../../assets/hotel_avatar.png');
@@ -57,7 +60,25 @@ const HotelsPage = ({ route, navigation }) => {
   }
 
   if (hotels.length === 0) {
-    getHotels();
+    setHotels([
+      {
+        photo: hotelImage,
+        hotel_id: 1,
+        name: 'Mirage',
+        location: 'Mamaia',
+      },
+      {
+        photo: hotelImage,
+        hotel_id: 2,
+        name: 'Atlantis',
+        location: 'Constanta',
+      },
+      {
+        photo: hotelImage,
+        hotel_id: 3,
+        name: 'Gargantua',
+        location: 'Transilvania',
+      }]);
   }
 
   const onChangeSearch = (query) => setSearchQuery(query);
@@ -71,29 +92,24 @@ const HotelsPage = ({ route, navigation }) => {
         onChangeText={onChangeSearch}
         value={searchQuery}
       />
-      <Text>
-        test user mail:
-        {user.email}
-      </Text>
       <FlatList
         data={hotels}
         keyExtractor={(item) => item.hotel_id}
         renderItem={({ item }) => (
           <View style={styles.container}>
-            <Image source={hotelImage} style={styles.image} />
-            <Text style={styles.text}>
-              Hotel
-              {' '}
-              {item.name}
-              {' \n'}
-              Location:
-              {' '}
-              {item.location}
-            </Text>
-            <Button
-              title="Make Reservation"
-              onPress={() => goToMakeReservation(item.hotel_id)}
-            />
+            <Card>
+              <Card.Title title={item.name} />
+              <Card.Content>
+                <Paragraph>
+                  Location:
+                  {item.location}
+                </Paragraph>
+              </Card.Content>
+              <Card.Cover source={hotelImage} />
+              <Card.Actions>
+                <Button onPress={() => goToMakeReservation(item.hotel_id)}>Make Reservation</Button>
+              </Card.Actions>
+            </Card>
           </View>
         )}
       />
