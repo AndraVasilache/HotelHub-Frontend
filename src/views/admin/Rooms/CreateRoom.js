@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const CreateRoom = ({ hotelId }) => {
+const CreateRoom = ({ hotelId, onSubmit }) => {
   const [room, setRoom] = useState({
     name: '',
     price: '',
@@ -82,6 +82,8 @@ const CreateRoom = ({ hotelId }) => {
           noOfPeople: '',
           type: '',
         });
+
+        onSubmit();
         return true;
       })
       .catch((error) => {

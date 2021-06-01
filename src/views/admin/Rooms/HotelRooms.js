@@ -106,7 +106,13 @@ const Rooms = ({ route, navigation }) => {
         Platform.OS === 'android'
           ? (
             <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
-              <CreateRoom hotelId={user.hotel_admin} />
+              <CreateRoom
+                hotelId={user.hotel_admin}
+                onSubmit={() => {
+                  setVisible(false);
+                  getRooms();
+                }}
+              />
             </Overlay>
           ) : (
             <Overlay
@@ -115,7 +121,13 @@ const Rooms = ({ route, navigation }) => {
               onBackdropPress={toggleOverlay}
               ariaHideApp={false}
             >
-              <CreateRoom hotelId={user.hotel_admin} />
+              <CreateRoom
+                hotelId={user.hotel_admin}
+                onSubmit={() => {
+                  setVisible(false);
+                  getRooms();
+                }}
+              />
             </Overlay>
           )
       }
