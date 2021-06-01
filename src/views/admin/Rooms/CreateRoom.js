@@ -3,6 +3,8 @@ import {
   View, Text, StyleSheet, TouchableOpacity, Platform,
 } from 'react-native';
 import { TextInput, HelperText } from 'react-native-paper';
+import axios from 'axios';
+import { set } from 'react-native-reanimated';
 
 const styles = StyleSheet.create({
   container: {
@@ -57,6 +59,36 @@ const CreateRoom = ({ hotelId }) => {
 
   const noPeopleValidation = () => Number.isNaN(parseInt(room.noOfPeople, 10));
 
+  function addRoom() {
+    const options = {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },
+    };
+
+    axios.post('https://hotelhubip.herokuapp.com/admin/actions/room/add', {
+      price: room.price,
+      name: room.name,
+      hotel_id: hotelId,
+      no_of_people: room.noOfPeople,
+      type: room.type,
+    }, options)
+      .then((response) => {
+        console.log(response);
+        setRoom({
+          name: '',
+          price: '',
+          noOfPeople: '',
+          type: '',
+        });
+        return true;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}> Add a new room </Text>
@@ -101,6 +133,7 @@ const CreateRoom = ({ hotelId }) => {
 
       <TouchableOpacity
         style={styles.button}
+        onPress={addRoom}
       >
         <Text style={styles.inputText}>
           Create room

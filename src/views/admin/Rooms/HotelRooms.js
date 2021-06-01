@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet, View, FlatList, Text, Image, Button,
+  StyleSheet, View, FlatList, Text, Image, Button, Platform,
 } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import axios from 'axios';
-
-import Modal from 'react-native-modal';
+import { Overlay } from 'react-native-elements';
+import Modal from 'modal-react-native-web';
+import CreateRoom from './CreateRoom';
 
 const hotelImage = require('../../../../assets/hotel_avatar.png');
 
@@ -40,12 +41,12 @@ const styles = StyleSheet.create({
 
 const Rooms = ({ route, navigation }) => {
   const user = (route && route.params && route.params.user) ? route.params.user : { email: '', password: '' };
-  const [rooms, setRooms] = useState([]);
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [rooms, setRooms] = useState(false);
   const [searchQuery, setSearchQuery] = React.useState('');
+  const [visible, setVisible] = useState(false);
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
+  const toggleOverlay = () => {
+    setVisible(!visible);
   };
 
   function getRooms() {
@@ -91,7 +92,7 @@ const Rooms = ({ route, navigation }) => {
       });
   }
 
-  if (rooms.length === 0) {
+  if (rooms === false) {
     getRooms();
   }
 
@@ -99,22 +100,29 @@ const Rooms = ({ route, navigation }) => {
 
   return (
     <View>
-      {isModalVisible
-      && (
-      <Modal isVisible={isModalVisible} style={styles.modal}>
-        <View>
-          <Text>Hello!</Text>
+      <View>
+        <Button title="Open Overlay" onPress={toggleOverlay} />
+        {
+        Platform.OS === 'android'
+          ? (
+            <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
+              <CreateRoom hotelId={user.hotel_admin} />
+            </Overlay>
+          ) : (
+            <Overlay
+              isVisible={visible}
+              ModalComponent={Modal}
+              onBackdropPress={toggleOverlay}
+              ariaHideApp={false}
+            >
+              <CreateRoom hotelId={user.hotel_admin} />
+            </Overlay>
+          )
+      }
+      </View>
 
-          <Button title="Hide modal" onPress={toggleModal} />
-        </View>
-      </Modal>
-      )}
-
-      {!isModalVisible
-      && (
       <View>
         <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
-        <Button title="Add room" onPress={() => toggleModal()} />
 
         <Searchbar
           placeholder="Search a location"
@@ -141,7 +149,6 @@ const Rooms = ({ route, navigation }) => {
           )}
         />
       </View>
-      )}
     </View>
   );
 };
