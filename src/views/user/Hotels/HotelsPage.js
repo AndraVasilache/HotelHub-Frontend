@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 
 const HotelsPage = ({ route, navigation }) => {
   const user = (route && route.params && route.params.user) ? route.params.user : { email: '', password: '' };
-  const [hotels, setHotels] = useState([]);
+  const [hotels, setHotels] = useState(false);
 
   const [searchQuery, setSearchQuery] = React.useState('');
 
@@ -45,9 +45,7 @@ const HotelsPage = ({ route, navigation }) => {
 
     axios.get('https://hotelhubip.herokuapp.com/users/actions/hotels', options)
       .then((response) => {
-        console.log(response.data);
         setHotels(response.data);
-        return response.data;
       })
       .catch((error) => {
         console.log(error);
@@ -59,26 +57,8 @@ const HotelsPage = ({ route, navigation }) => {
     navigation.navigate('MakeReservation', { hotel_id, user });
   }
 
-  if (hotels.length === 0) {
-    setHotels([
-      {
-        photo: hotelImage,
-        hotel_id: 1,
-        name: 'Mirage',
-        location: 'Mamaia',
-      },
-      {
-        photo: hotelImage,
-        hotel_id: 2,
-        name: 'Atlantis',
-        location: 'Constanta',
-      },
-      {
-        photo: hotelImage,
-        hotel_id: 3,
-        name: 'Gargantua',
-        location: 'Transilvania',
-      }]);
+  if (hotels === false) {
+    getHotels();
   }
 
   const onChangeSearch = (query) => setSearchQuery(query);

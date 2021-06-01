@@ -4,7 +4,6 @@ import {
 } from 'react-native';
 import { TextInput, HelperText } from 'react-native-paper';
 import axios from 'axios';
-import { set } from 'react-native-reanimated';
 
 const styles = StyleSheet.create({
   container: {
@@ -48,6 +47,7 @@ const styles = StyleSheet.create({
 });
 
 const CreateRoom = ({ hotelId, onSubmit }) => {
+  // main state of the modal: current room
   const [room, setRoom] = useState({
     name: '',
     price: '',
@@ -55,10 +55,11 @@ const CreateRoom = ({ hotelId, onSubmit }) => {
     type: '',
   });
 
+  // validation functions for numeric fields
   const priceValidation = () => Number.isNaN(parseInt(room.price, 10));
-
   const noPeopleValidation = () => Number.isNaN(parseInt(room.noOfPeople, 10));
 
+  // axios request to add a room
   function addRoom() {
     const options = {
       headers: {
@@ -84,7 +85,6 @@ const CreateRoom = ({ hotelId, onSubmit }) => {
         });
 
         onSubmit();
-        return true;
       })
       .catch((error) => {
         console.log(error);

@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import {
-  View, Text, Button, Image, StyleSheet,
+  View, Text, Image, StyleSheet,
 } from 'react-native';
+import {
+  Button, Card, Title, Paragraph,
+} from 'react-native-paper';
 import axios from 'axios';
 
 const hotelImage = require('../../../../assets/hotel_avatar.png');
@@ -44,11 +47,10 @@ function HotelPage({ route, navigation }) {
 
     axios.get('https://hotelhubip.herokuapp.com/admin/actions/hotel/get', options)
       .then((response) => {
-        console.log(response);
-
         setHotel(response.data);
       })
       .catch((error) => {
+        // eslint-disable-next-line no-console
         console.log(error);
       });
   }
@@ -75,6 +77,7 @@ function HotelPage({ route, navigation }) {
       });
   }
 
+  // update page state
   if (hotel.id === '') {
     get();
   }
@@ -82,19 +85,16 @@ function HotelPage({ route, navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
-      <View style={styles.container}>
-        <Image source={hotelImage} style={styles.image} />
-        <Text style={styles.text}>
-          Hotel
-          {' '}
-          {hotel.name}
-          {' \n'}
-          Location:
-          {' '}
-          {hotel.location}
-        </Text>
-        <Button title="Delete Hotel" onPress={deleteHotel} />
-      </View>
+      <Card>
+        <Card.Title title={hotel.name} subtitle={hotel.location} />
+        <Card.Content>
+          <Title>Mama ce descriere</Title>
+        </Card.Content>
+        <Card.Cover source={hotelImage} />
+        <Card.Actions>
+          <Button onPress={deleteHotel}> Delete Hotel</Button>
+        </Card.Actions>
+      </Card>
     </View>
   );
 }
