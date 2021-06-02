@@ -76,7 +76,6 @@ const SignUpScreen = ({ navigation }) => {
       hotel_admin: '',
     }, options)
       .then((response) => {
-        console.log(response);
         if (response.data) {
           navigation.navigate('Login');
         } else {
@@ -85,6 +84,7 @@ const SignUpScreen = ({ navigation }) => {
         return response;
       })
       .catch((error) => {
+        // eslint-disable-next-line no-console
         console.log(error);
       });
   }

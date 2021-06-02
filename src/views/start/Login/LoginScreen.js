@@ -6,7 +6,7 @@ import { TextInput, HelperText, Avatar } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from 'axios';
 
-const defaultAvatar = require('../../../../assets/defaultAvatar.png');
+const defaultAvatar = require('../../../../assets/login.png');
 
 const styles = StyleSheet.create({
   containerView: {
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Playfair',
   },
   button: {
-    backgroundColor: '#1F3B3F',
+    backgroundColor: '#5c0099',
     borderRadius: 25,
     height: 50,
     width: 200,
