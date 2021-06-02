@@ -7,7 +7,7 @@ import {
 } from 'react-native-paper';
 import axios from 'axios';
 
-const hotelImage = require('../../../../assets/hotel_avatar.png');
+const hotelImage = require('../../../../assets/imagenotfound.jpg');
 
 const styles = StyleSheet.create({
   container: {
@@ -90,7 +90,7 @@ function HotelPage({ route, navigation }) {
         <Card.Content>
           <Title>Mama ce descriere</Title>
         </Card.Content>
-        <Card.Cover source={hotelImage} />
+        <Card.Cover source={hotel.photo || hotelImage} />
         <Card.Actions>
           <Button onPress={deleteHotel}> Delete Hotel</Button>
         </Card.Actions>

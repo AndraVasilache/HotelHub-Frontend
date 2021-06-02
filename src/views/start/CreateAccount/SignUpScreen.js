@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  View, StyleSheet, TouchableOpacity, Text,
+  View, StyleSheet, TouchableOpacity, Text, Platform,
 } from 'react-native';
 import { TextInput, HelperText } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   inputText: {
     color: 'white',
     fontFamily: 'Playfair',
+    fontSize: Platform.OS === 'web' ? 20 : 15,
   },
   button: {
     backgroundColor: '#5c0099',

@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import {
+  View, Text, Button, ImageBackground, StyleSheet, Platform,
+} from 'react-native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -11,21 +13,44 @@ import HotelsPage from '../Hotels/HotelsPage';
 import Pending from '../Pending/PendingScreen';
 import Reservations from '../Reservations/ReservationsScreen';
 
+const backgroundImage = require('../../../../assets/userHome.jpg');
+
+const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  defaultMessage: {
+    color: '#5c0099',
+    justifyContent: 'center',
+    fontSize: Platform.OS === 'web' ? 27 : 19,
+    height: 80,
+    lineHeight: 20,
+    alignSelf: 'stretch',
+    textAlign: 'center',
+    marginBottom: 30,
+    fontFamily: 'Playfair',
+  },
+});
+
 let user;
 
 function Feed({ navigation }) {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ fontSize: 24 }}>
-        Hi user,
-        { ' ' }
-        {user.name}
-        { ' ' }
-        !
-      </Text>
-      <Text>Feed Screen</Text>
-      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
-    </View>
+    <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={styles.defaultMessage}>
+          Hi,
+          { ' ' }
+          {user.name}
+          { ' ' }
+          ! Where to next?
+        </Text>
+        <Text>Feed Screen</Text>
+        <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
+      </View>
+    </ImageBackground>
   );
 }
 
@@ -34,12 +59,8 @@ function CustomDrawerContent(props) {
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
       <DrawerItem
-        label="Close drawer"
+        label="Close menu"
         onPress={() => props.navigation.closeDrawer()}
-      />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => props.navigation.toggleDrawer()}
       />
     </DrawerContentScrollView>
   );

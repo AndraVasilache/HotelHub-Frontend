@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet, View, FlatList, Text,
+  StyleSheet, View, FlatList, Text, Platform,
 } from 'react-native';
 import {
   Searchbar, Card, Paragraph, Button,
 } from 'react-native-paper';
 import axios from 'axios';
 
-const hotelImage = require('../../../../assets/hotel_avatar.png');
+const hotelImage = require('../../../../assets/imagenotfound.jpg');
 
 const styles = StyleSheet.create({
   container: {
@@ -17,9 +17,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   image: {
-    width: 250,
-    height: 250,
-    alignSelf: 'center',
+    backgroundColor: 'white',
   },
   text: {
     textAlign: 'center',
@@ -83,7 +81,7 @@ const HotelsPage = ({ route, navigation }) => {
                   {item.location}
                 </Paragraph>
               </Card.Content>
-              <Card.Cover source={hotelImage} />
+              <Card.Cover source={{ uri: item.photo } || hotelImage} style={styles.image} resizeMode="center" />
               <Card.Actions>
                 <Button onPress={() => goToMakeReservation(item.hotel_id)}>Make Reservation</Button>
               </Card.Actions>

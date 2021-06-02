@@ -109,6 +109,13 @@ const HotelRegistration = ({ route, navigation }) => {
           Name at given location is taken!
         </HelperText>
 
+        <TextInput
+          style={styles.input}
+          label="Photo link"
+          value={hotel.photo}
+          onChangeText={(photo) => setHotel({ ...hotel, photo })}
+        />
+
         <TouchableOpacity
           style={styles.button}
           onPress={() => registration()}

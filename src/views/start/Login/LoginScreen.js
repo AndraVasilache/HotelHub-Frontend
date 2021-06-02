@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import {
-  View, StyleSheet, TouchableOpacity, Text,
+  View, StyleSheet, TouchableOpacity, Text, Platform,
 } from 'react-native';
 import { TextInput, HelperText, Avatar } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from 'axios';
 
-const defaultAvatar = require('../../../../assets/login.png');
+const defaultAvatar = require('../../../../assets/usericon.png');
 
 const styles = StyleSheet.create({
   containerView: {
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
   inputText: {
     color: 'white',
     fontFamily: 'Playfair',
+    fontSize: Platform.OS === 'web' ? 20 : 15,
   },
   button: {
     backgroundColor: '#5c0099',
@@ -105,7 +106,7 @@ const SignUpScreen = ({ navigation }) => {
 
         <TextInput
           style={styles.input}
-          label="Email"
+          placeholder="Email"
           value={user.email}
           onChangeText={(email) => setUser({ ...user, email })}
         />
@@ -117,7 +118,7 @@ const SignUpScreen = ({ navigation }) => {
 
         <TextInput
           style={styles.input}
-          label="Password"
+          placeholder="Password"
           secureTextEntry
           value={user.password}
           onChangeText={(password) => setUser({ ...user, password })}
