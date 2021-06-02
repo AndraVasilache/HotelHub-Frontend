@@ -1,25 +1,20 @@
 import React, { useState } from 'react';
 import {
-  View, Text, Image, StyleSheet,
+  View, StyleSheet,
 } from 'react-native';
 import {
   Button, Card, Title, Paragraph,
 } from 'react-native-paper';
 import axios from 'axios';
 
-const hotelImage = require('../../../../assets/imagenotfound.jpg');
+const hotelImageMissing = require('../../../../assets/imagenotfound.jpg');
 
 const styles = StyleSheet.create({
   container: {
-    textAlign: 'center',
-    fontSize: 20,
-    fontFamily: 'Playfair',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingBottom: 10,
-  },
-  image: {
-    width: 250,
-    height: 250,
-    alignSelf: 'center',
   },
   text: {
     textAlign: 'center',
@@ -83,14 +78,14 @@ function HotelPage({ route, navigation }) {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={styles.container}>
       <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
       <Card>
         <Card.Title title={hotel.name} subtitle={hotel.location} />
         <Card.Content>
           <Title>Mama ce descriere</Title>
         </Card.Content>
-        <Card.Cover source={hotel.photo || hotelImage} />
+        <Card.Cover source={hotel.photo || hotelImageMissing} />
         <Card.Actions>
           <Button onPress={deleteHotel}> Delete Hotel</Button>
         </Card.Actions>

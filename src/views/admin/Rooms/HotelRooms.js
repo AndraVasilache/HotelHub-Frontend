@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet, View, FlatList, Text, Image, Button, Platform,
+  StyleSheet, View, FlatList, Platform, TouchableOpacity,
 } from 'react-native';
-import { Searchbar } from 'react-native-paper';
+import {
+  Card, Paragraph, Button,
+} from 'react-native-paper';
 import axios from 'axios';
 import { Overlay } from 'react-native-elements';
 import Modal from 'modal-react-native-web';
 import CreateRoom from './CreateRoom';
 
-const hotelImage = require('../../../../assets/hotel_avatar.png');
-
 const styles = StyleSheet.create({
+  button: {
+    backgroundColor: '#5c0099',
+    borderRadius: 25,
+    height: 50,
+    width: 300,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+    fontFamily: 'Playfair',
+  },
   container: {
     textAlign: 'center',
     fontSize: 20,
@@ -18,31 +28,18 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   image: {
-    width: 250,
-    height: 250,
-    alignSelf: 'center',
+    backgroundColor: 'white',
   },
   text: {
     textAlign: 'center',
     fontSize: 20,
     fontFamily: 'Playfair',
   },
-  button: {
-    backgroundColor: '#1F3B3F',
-    borderRadius: 25,
-    height: 50,
-    width: 200,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
-    fontSize: 30,
-  },
 });
 
 const Rooms = ({ route, navigation }) => {
   const user = (route && route.params && route.params.user) ? route.params.user : { email: '', password: '' };
   const [rooms, setRooms] = useState(false);
-  const [searchQuery, setSearchQuery] = React.useState('');
   const [visible, setVisible] = useState(false);
 
   const toggleOverlay = () => {
@@ -96,13 +93,28 @@ const Rooms = ({ route, navigation }) => {
     getRooms();
   }
 
-  const onChangeSearch = (query) => setSearchQuery(query);
-
   return (
     <View>
+
       <View>
-        <Button title="Open Overlay" onPress={toggleOverlay} />
-        {
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.toggleDrawer()}
+        >
+          Open drawer
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={toggleOverlay}
+        >
+          Add a new room
+        </TouchableOpacity>
+        <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
+
+        {/* add a room modal */}
+        <View>
+          {
         Platform.OS === 'android'
           ? (
             <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
@@ -131,32 +143,36 @@ const Rooms = ({ route, navigation }) => {
             </Overlay>
           )
       }
-      </View>
+        </View>
 
-      <View>
-        <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
-
-        <Searchbar
-          placeholder="Search a location"
-          onChangeText={onChangeSearch}
-          value={searchQuery}
-        />
+        {/* room list */}
         <FlatList
           data={rooms}
           keyExtractor={(item) => item.room_id}
           renderItem={({ item }) => (
             <View style={styles.container}>
-              <Image source={hotelImage} style={styles.image} />
-              <Text style={styles.text}>
-                Room
-                {' '}
-                {item.name}
-                {' \n'}
-                Price:
-                {' '}
-                {item.price}
-              </Text>
-              <Button title="Delete room" onPress={() => deleteRoom(item)} />
+              <Card>
+                <Card.Title title={item.name} />
+                <Card.Content>
+                  <Paragraph>
+                    Price:
+                    {' '}
+                    {item.price}
+                    {'\n'}
+                    Number of people:
+                    {' '}
+                    {item.no_of_people}
+                    {'\n'}
+                    Type:
+                    {' '}
+                    {item.type}
+                    {'\n'}
+                  </Paragraph>
+                </Card.Content>
+                <Card.Actions>
+                  <Button onPress={() => deleteRoom(item)}>Delete room</Button>
+                </Card.Actions>
+              </Card>
             </View>
           )}
         />
