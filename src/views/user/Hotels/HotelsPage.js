@@ -52,9 +52,8 @@ const HotelsPage = ({ route, navigation }) => {
       });
   }
 
-  // eslint-disable-next-line camelcase
-  function goToMakeReservation(hotel_id) {
-    navigation.navigate('Make Reservation a', { hotel_id, user });
+  function goToMakeReservation(hotelId) {
+    navigation.navigate('Make Reservation', { hotelId, user });
   }
 
   if (hotels === false) {

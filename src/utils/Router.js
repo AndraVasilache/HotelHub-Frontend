@@ -4,15 +4,13 @@ import StartScreen from '../views/start/StartPage/StartScreen';
 import LoginScreen from '../views/start/Login/LoginScreen';
 import AboutUsScreen from '../views/start/AboutUs/AboutUsScreen';
 import SignUpScreen from '../views/start/CreateAccount/SignUpScreen';
-import AndroidReservation from '../views/user/MakeReservation/MakeReservationAndroid';
-import WebReservation from '../views/user/MakeReservation/MakeReservationWeb';
+import MakeReservation from '../views/user/MakeReservation/MakeReservation';
 import UserHomeScreen from '../views/user/UserHome/UserHome';
 import AdminHomeScreen from '../views/admin/AdminHome/AdminHome';
 import HotelsScreen from '../views/user/Hotels/HotelsPage';
 import DebugScreen from '../views/DebugScreen';
 import HotelRegistration from '../views/admin/HotelRegistration/HotelRegistration';
 import TestScreen from '../views/Test';
-import TestWeb from '../views/TestWeb';
 
 const Stack = createStackNavigator();
 
@@ -27,11 +25,6 @@ function RootStack() {
       <Stack.Screen
         name="Test"
         component={TestScreen}
-      />
-
-      <Stack.Screen
-        name="TestWeb"
-        component={TestWeb}
       />
 
       <Stack.Screen
@@ -55,13 +48,8 @@ function RootStack() {
       />
 
       <Stack.Screen
-        name="Make Reservation a"
-        component={AndroidReservation}
-      />
-
-      <Stack.Screen
-        name="Make Reservation w"
-        component={WebReservation}
+        name="MakeReservation"
+        component={MakeReservation}
       />
 
       <Stack.Screen

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet, View, Platform, Button,
+  StyleSheet, View, Platform, Button, Text
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
@@ -50,6 +50,7 @@ const MakeReservation = ({ route }) => {
 
   return (
     <View>
+      <Text> Android </Text>
       <View>
         <Button onPress={showDatepicker} title="Show date picker!" />
       </View>
