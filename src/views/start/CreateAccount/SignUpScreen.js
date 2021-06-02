@@ -12,9 +12,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
   },
-  container: {
+  containerViewInner: {
+    alignItems: 'center',
+    alignSelf: 'center',
+    justifyContent: 'space-between',
+  },
+  containerKeyboardAwareScrollView: {
     alignItems: 'center',
     backgroundColor: 'white',
+    marginBottom: 10,
   },
   input: {
     width: 300,
@@ -22,18 +28,21 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     backgroundColor: 'white',
+    fontFamily: 'Playfair',
   },
   inputText: {
     color: 'white',
+    fontFamily: 'Playfair',
   },
   button: {
-    backgroundColor: '#1F3B3F',
+    backgroundColor: '#5c0099',
     borderRadius: 25,
     height: 50,
     width: 200,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
+    fontFamily: 'Playfair',
   },
 });
 
@@ -60,7 +69,7 @@ const SignUpScreen = ({ navigation }) => {
     };
 
     axios.post('https://hotelhubip.herokuapp.com/users/create', {
-      name: `${user.surname}${user.name}`,
+      name: `${user.surname} ${user.name}`,
       email: user.email,
       password: user.password,
       admin: false,
@@ -83,70 +92,72 @@ const SignUpScreen = ({ navigation }) => {
   return (
     <View style={styles.containerView}>
       <KeyboardAwareScrollView
-        contentContainerStyle={styles.container}
-        extraScrollHeight={40}
+        contentContainerStyle={styles.containerKeyboardAwareScrollView}
+        extraHeight={40}
       >
-        <TextInput
-          style={styles.input}
-          label="First name"
-          value={user.surname}
-          onChangeText={(surname) => setUser({ ...user, surname })}
-        />
+        <View style={styles.containerViewInner}>
+          <TextInput
+            style={styles.input}
+            placeholder="First name"
+            value={user.surname}
+            onChangeText={(surname) => setUser({ ...user, surname })}
+          />
 
-        <TextInput
-          style={styles.input}
-          label="Last name"
-          value={user.name}
-          onChangeText={(name) => setUser({ ...user, name })}
-        />
+          <TextInput
+            style={styles.input}
+            placeholder="Last name"
+            value={user.name}
+            onChangeText={(name) => setUser({ ...user, name })}
+          />
 
-        <TextInput
-          style={styles.input}
-          label="Email"
-          value={user.email}
-          onChangeText={(email) => setUser({ ...user, email })}
-        />
-        {user.email && emailValidation() ? (
-          <HelperText type="error" visible={emailValidation()}>
-            Email address is invalid!
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            value={user.email}
+            onChangeText={(email) => setUser({ ...user, email })}
+          />
+          {user.email && emailValidation() ? (
+            <HelperText type="error" visible={emailValidation()}>
+              Email address is invalid!
+            </HelperText>
+          ) : null}
+
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            secureTextEntry
+            value={user.password}
+            onChangeText={(password) => setUser({ ...user, password })}
+          />
+
+          <TextInput
+            style={styles.input}
+            placeholder="Retype password"
+            secureTextEntry
+            value={user.passwordCheck}
+            onChangeText={(passwordCheck) => setUser({ ...user, passwordCheck })}
+          />
+          {user.passwordCheck && passwordValidation() ? (
+            <HelperText type="error" visible={passwordValidation()}>
+              Passwords do not match!
+            </HelperText>
+          ) : null}
+
+          <HelperText type="error" visible={badSignUp}>
+            Email already in use!
           </HelperText>
-        ) : null}
 
-        <TextInput
-          style={styles.input}
-          label="Password"
-          secureTextEntry
-          value={user.password}
-          onChangeText={(password) => setUser({ ...user, password })}
-        />
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => register()}
+          >
+            <Text style={styles.inputText}>
+              Create account
+            </Text>
+          </TouchableOpacity>
 
-        <TextInput
-          style={styles.input}
-          label="Retype password"
-          secureTextEntry
-          value={user.passwordCheck}
-          onChangeText={(passwordCheck) => setUser({ ...user, passwordCheck })}
-        />
-        {user.passwordCheck && passwordValidation() ? (
-          <HelperText type="error" visible={passwordValidation()}>
-            Passwords do not match!
-          </HelperText>
-        ) : null}
-
-        <HelperText type="error" visible={badSignUp}>
-          Email already in use!
-        </HelperText>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => register()}
-        >
-          <Text style={styles.inputText}>
-            Create account
-          </Text>
-        </TouchableOpacity>
+        </View>
       </KeyboardAwareScrollView>
-
     </View>
   );
 };
