@@ -41,8 +41,8 @@ const DebugScreen = ({ navigation }) => (
     />
 
     <Button
-      title="MakeReservation"
-      onPress={() => navigation.navigate('MakeReservation')}
+      title="MakeReservation a"
+      onPress={() => navigation.navigate('Make Reservation a')}
     />
 
     <Button
@@ -62,7 +62,7 @@ const DebugScreen = ({ navigation }) => (
 
     <Button
       title="TestWeb"
-      onPress={() => navigation.navigate('TestWeb')}
+      onPress={() => navigation.navigate('Make Reservation w')}
     />
   </View>
 );

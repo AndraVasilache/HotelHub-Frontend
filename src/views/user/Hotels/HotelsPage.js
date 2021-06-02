@@ -54,7 +54,7 @@ const HotelsPage = ({ route, navigation }) => {
 
   // eslint-disable-next-line camelcase
   function goToMakeReservation(hotel_id) {
-    navigation.navigate('MakeReservation', { hotel_id, user });
+    navigation.navigate('Make Reservation a', { hotel_id, user });
   }
 
   if (hotels === false) {

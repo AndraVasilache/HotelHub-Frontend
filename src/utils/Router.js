@@ -4,7 +4,8 @@ import StartScreen from '../views/start/StartPage/StartScreen';
 import LoginScreen from '../views/start/Login/LoginScreen';
 import AboutUsScreen from '../views/start/AboutUs/AboutUsScreen';
 import SignUpScreen from '../views/start/CreateAccount/SignUpScreen';
-import ReservationScreen from '../views/user/MakeReservation/MakeReservation';
+import AndroidReservation from '../views/user/MakeReservation/MakeReservationAndroid';
+import WebReservation from '../views/user/MakeReservation/MakeReservationWeb';
 import UserHomeScreen from '../views/user/UserHome/UserHome';
 import AdminHomeScreen from '../views/admin/AdminHome/AdminHome';
 import HotelsScreen from '../views/user/Hotels/HotelsPage';
@@ -54,8 +55,13 @@ function RootStack() {
       />
 
       <Stack.Screen
-        name="MakeReservation"
-        component={ReservationScreen}
+        name="Make Reservation a"
+        component={AndroidReservation}
+      />
+
+      <Stack.Screen
+        name="Make Reservation w"
+        component={WebReservation}
       />
 
       <Stack.Screen
