@@ -5,7 +5,6 @@ import {
 import {
   Searchbar, Card, Paragraph, Button,
 } from 'react-native-paper';
-
 import axios from 'axios';
 
 const hotelImage = require('../../../../assets/hotel_avatar.png');
@@ -53,7 +52,7 @@ const HotelsPage = ({ route, navigation }) => {
   }
 
   function goToMakeReservation(hotelId) {
-    navigation.navigate('Make Reservation', { hotelId, user });
+    navigation.navigate('MakeReservation', { hotelId, user });
   }
 
   if (hotels === false) {

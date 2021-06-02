@@ -1,57 +1,21 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet, View, Button, Platform,
+  StyleSheet, View, FlatList, Text,
 } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 
-const styles = StyleSheet.create({
-
-});
-
-const Test = () => {
-  const [date, setDate] = useState(new Date(1598051730000));
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
-
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'web'); // era ios
-    setDate(currentDate);
-  };
-
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
-  };
-
-  const showDatepicker = () => {
-    showMode('date');
-  };
-
-  const showTimepicker = () => {
-    showMode('time');
-  };
+function TestWeb() {
+  const [value, onChange] = useState([new Date(), new Date()]);
 
   return (
     <View>
-      <View>
-        <Button onPress={showDatepicker} title="Show date picker!" />
-      </View>
-      <View>
-        <Button onPress={showTimepicker} title="Show time picker!" />
-      </View>
-      {show && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode={mode}
-          is24Hour={true}
-          display="default"
-          onChange={onChange}
-        />
-      )}
+      <Text>hello fa</Text>
+      <DateRangePicker
+        onChange={onChange}
+        value={value}
+      />
     </View>
   );
-};
+}
 
-export default Test;
+export default TestWeb;
