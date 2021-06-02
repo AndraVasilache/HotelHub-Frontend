@@ -2,48 +2,56 @@ import React, { useState } from 'react';
 import {
   StyleSheet, View, Button, Platform,
 } from 'react-native';
-import { Overlay } from 'react-native-elements';
-import Modal from 'modal-react-native-web';
-import CreateRoom from './admin/Rooms/CreateRoom';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const styles = StyleSheet.create({
-  container: {
-    textAlign: 'center',
-    fontSize: 20,
-    fontFamily: 'Playfair',
-    paddingBottom: 10,
-  },
+
 });
 
-const Rooms = () => {
-  const [visible, setVisible] = useState(false);
+const Test = () => {
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
 
-  const toggleOverlay = () => {
-    setVisible(!visible);
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'web'); // era ios
+    setDate(currentDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
   };
 
   return (
     <View>
-      <Button title="Open Overlay" onPress={toggleOverlay} />
-      {
-        Platform.OS === 'android'
-          ? (
-            <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
-              <CreateRoom />
-            </Overlay>
-          ) : (
-            <Overlay
-              isVisible={visible}
-              ModalComponent={Modal}
-              onBackdropPress={toggleOverlay}
-              ariaHideApp={false}
-            >
-              <CreateRoom />
-            </Overlay>
-          )
-      }
+      <View>
+        <Button onPress={showDatepicker} title="Show date picker!" />
+      </View>
+      <View>
+        <Button onPress={showTimepicker} title="Show time picker!" />
+      </View>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
+      )}
     </View>
   );
 };
 
-export default Rooms;
+export default Test;
