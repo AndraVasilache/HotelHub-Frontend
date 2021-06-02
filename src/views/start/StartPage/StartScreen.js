@@ -15,33 +15,30 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  fixToEnd: {
-    position: 'absolute',
-    width: 100,
-    height: 50,
-    bottom: 0,
-  },
   inputText: {
     color: 'white',
+    fontFamily: 'Playfair',
   },
   defaultMessage: {
-    color: '#274650',
+    color: '#5c0099',
     justifyContent: 'center',
-    fontSize: 20,
+    fontSize: 25,
     height: 80,
     lineHeight: 20,
     alignSelf: 'stretch',
     textAlign: 'center',
     marginBottom: 30,
+    fontFamily: 'Playfair',
   },
   button: {
-    backgroundColor: '#1F3B3F',
+    backgroundColor: '#5c0099',
     borderRadius: 25,
     height: 50,
     width: 300,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
+    fontFamily: 'Playfair',
   },
   aboutUs: {
     borderRadius: 25,
@@ -53,6 +50,7 @@ const styles = StyleSheet.create({
   },
   aboutText: {
     color: 'black',
+    fontFamily: 'Playfair',
   },
 });
 
