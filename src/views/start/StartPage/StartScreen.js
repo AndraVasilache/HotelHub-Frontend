@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  StyleSheet, ImageBackground, View, TouchableOpacity, Text,
+  StyleSheet, ImageBackground, View, TouchableOpacity, Text, Platform
 } from 'react-native';
 
-const backgroundImage = require('../../../../assets/home.jpg');
+const backgroundImage = require('../../../../assets/startBackground.jpg');
 
 const styles = StyleSheet.create({
   backgroundImage: {
@@ -12,17 +12,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   fixToText: {
+    marginTop: Platform.OS === 'web' ? 80 : 15,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   inputText: {
     color: 'white',
     fontFamily: 'Playfair',
+    fontSize: Platform.OS === 'web' ? 20 : 15,
   },
   defaultMessage: {
     color: '#5c0099',
     justifyContent: 'center',
-    fontSize: 25,
+    fontSize: Platform.OS === 'web' ? 25 : 20,
     height: 80,
     lineHeight: 20,
     alignSelf: 'stretch',
