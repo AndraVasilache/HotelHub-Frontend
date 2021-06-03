@@ -16,6 +16,8 @@
 - `cd hotelhub_frontend`
 - `npm install`
 - `npm start`
+- From here you should be able to run the app from the expo interface (run on web or run on android)
+- On android you need to have the expo app installed
 
 ## Quick start
 
