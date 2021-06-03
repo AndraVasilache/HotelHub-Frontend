@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet, View, Button, Platform, Text, TouchableOpacity,
+  StyleSheet, View, Text, TouchableOpacity,
 } from 'react-native';
+import {
+  Card, Paragraph, Button,
+} from 'react-native-paper';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+import RNPickerSelect from 'react-native-picker-select';
 import axios from 'axios';
 
 const styles = StyleSheet.create({
   containerView: {
     flex: 1,
     alignItems: 'center',
+    alignSelf: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
+    width: '70%',
   },
   container: {
     flex: 1,
@@ -31,10 +37,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Playfair',
   },
   button: {
-    backgroundColor: '#1F3B3F',
+    backgroundColor: '#5c0099',
     borderRadius: 25,
-    height: 50,
-    width: 200,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
@@ -47,14 +51,17 @@ const styles = StyleSheet.create({
   },
 });
 
-function MakeReservation({ hotelId, user }) {
+function MakeReservation({ route }) {
   const [date, setDate] = useState([new Date(), new Date()]);
-  const [rooms, setRooms] = useState([]);
+  const user = (route && route.params && route.params.user) ? route.params.user : { email: '', password: '' };
+  const hotelId = (route && route.params && route.params.hotelId) ? route.params.hotelId : '';
+  let rooms = [];
+  const [roomPicker, setRoomPicker] = useState([]);
+  const [selectedRoom, setSelectedRoom] = useState(undefined);
 
   function getRooms() {
-    console.log(date);
-    const startDate = `${date[0].getFullYear()}-${date[0].getMonth()}-${date[0].getDate()}`;
-    const endDate = `${date[1].getFullYear()}-${date[1].getMonth()}-${date[1].getDate()}`;
+    const startDate = date[0].getTime();
+    const endDate = date[1].getTime();
     const options = {
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -69,16 +76,48 @@ function MakeReservation({ hotelId, user }) {
 
     axios.get('https://hotelhubip.herokuapp.com/bookings/rooms/available', options)
       .then((response) => {
-        console.log(response);
-        setRooms(response.data);
+        rooms = response.data;
+        const temp = [];
+        rooms.forEach((entry) => {
+          const pick = {};
+          pick.label = entry.type;
+          pick.entry = entry;
+          temp.push(pick);
+        });
+        setRoomPicker(temp);
+        console.log(roomPicker);
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
+  function confirmReservation() {
+    const options = {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },
+      params: {
+        start_date: date[0].getTime(),
+        end_date: date[1].getTime(),
+        user_id: user.user_id,
+      },
+    };
+
+    axios.post('https://hotelhubip.herokuapp.com/client/booking/create',
+      selectedRoom, options)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      });
+  }
+
   return (
-    <View>
+    <View style={styles.containerView}>
       <DateRangePicker
         onChange={setDate}
         value={date}
@@ -92,6 +131,38 @@ function MakeReservation({ hotelId, user }) {
           Check availability
         </Text>
       </TouchableOpacity>
+
+      <RNPickerSelect
+        onValueChange={(_value, i) => setSelectedRoom(
+          (roomPicker[i - 1] && roomPicker[i - 1].entry) || undefined,
+        )}
+        items={roomPicker}
+      />
+
+      {selectedRoom && (
+        <Card>
+          <Card.Title title={selectedRoom.name} />
+          <Card.Content>
+            <Paragraph>
+              Price:
+              {' '}
+              {selectedRoom.price}
+              {'\n'}
+              Number of people:
+              {' '}
+              {selectedRoom.no_of_people}
+              {'\n'}
+              Type:
+              {' '}
+              {selectedRoom.type}
+              {'\n'}
+            </Paragraph>
+          </Card.Content>
+          <Card.Actions>
+            <Button onPress={() => confirmReservation()}>Confirm reservation</Button>
+          </Card.Actions>
+        </Card>
+      )}
     </View>
   );
 }

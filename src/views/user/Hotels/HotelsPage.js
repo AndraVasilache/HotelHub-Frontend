@@ -50,6 +50,9 @@ const HotelsPage = ({ route, navigation }) => {
   }
 
   function goToMakeReservation(hotelId) {
+    console.log(`aici}`);
+    console.log(user);
+    console.log(`aici`);
     navigation.navigate('MakeReservation', { hotelId, user });
   }
 

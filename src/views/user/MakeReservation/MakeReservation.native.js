@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet, View, Platform, Button, Text
+  StyleSheet, View, Platform, Button, Text,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,6 +29,12 @@ const MakeReservation = ({ route }) => {
   const [date, setDate] = useState(new Date(1598051730000));
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    { label: 'Apple', value: 'apple' },
+    { label: 'Banana', value: 'banana' },
+  ]);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -57,6 +64,9 @@ const MakeReservation = ({ route }) => {
       <View>
         <Button onPress={showTimepicker} title="Show time picker!" />
       </View>
+      <View>
+        <Button onPress={() => setOpen(true)} title="Show normal picker!" />
+      </View>
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
@@ -67,7 +77,17 @@ const MakeReservation = ({ route }) => {
           onChange={onChange}
         />
       )}
+
+      <DropDownPicker
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
+      />
     </View>
+
   );
 };
 
