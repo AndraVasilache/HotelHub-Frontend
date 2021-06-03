@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet, View, Text, TouchableOpacity,
+  StyleSheet, View, Text, TouchableOpacity, Platform,
 } from 'react-native';
 import {
   Card, Paragraph, Button,
@@ -38,16 +38,33 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#5c0099',
-    borderRadius: 25,
+    height: 50,
+    width: 200,
     alignItems: 'center',
+    alignSelf: 'center',
     justifyContent: 'center',
     marginBottom: 10,
+    marginTop: 20,
     fontSize: 30,
   },
   pictureStyle: {
     backgroundColor: 'white',
     borderRadius: 0,
     borderColor: 'transparent',
+  },
+  RNPickerSelectStyle: {
+    width: 250,
+  },
+  defaultMessage: {
+    color: '#5c0099',
+    justifyContent: 'center',
+    fontSize: Platform.OS === 'web' ? 25 : 20,
+    height: 80,
+    lineHeight: 20,
+    alignSelf: 'stretch',
+    textAlign: 'center',
+    marginBottom: 30,
+    fontFamily: 'Playfair',
   },
 });
 
@@ -118,6 +135,9 @@ function MakeReservation({ route }) {
 
   return (
     <View style={styles.containerView}>
+      <Text style={styles.defaultMessage}>
+        Let me get you set up! First, pick a date
+      </Text>
       <DateRangePicker
         onChange={setDate}
         value={date}
@@ -132,12 +152,14 @@ function MakeReservation({ route }) {
         </Text>
       </TouchableOpacity>
 
-      <RNPickerSelect
-        onValueChange={(_value, i) => setSelectedRoom(
-          (roomPicker[i - 1] && roomPicker[i - 1].entry) || undefined,
-        )}
-        items={roomPicker}
-      />
+      <View style={styles.RNPickerSelectStyle}>
+        <RNPickerSelect
+          onValueChange={(_value, i) => setSelectedRoom(
+            (roomPicker[i - 1] && roomPicker[i - 1].entry) || undefined,
+          )}
+          items={roomPicker}
+        />
+      </View>
 
       {selectedRoom && (
         <Card>

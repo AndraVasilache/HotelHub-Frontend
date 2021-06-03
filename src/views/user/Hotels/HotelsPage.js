@@ -41,6 +41,17 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 30,
   },
+  defaultMessage: {
+    color: '#5c0099',
+    justifyContent: 'center',
+    fontSize: Platform.OS === 'web' ? 25 : 20,
+    height: 80,
+    lineHeight: 20,
+    alignSelf: 'stretch',
+    textAlign: 'center',
+    marginBottom: 30,
+    fontFamily: 'Playfair',
+  },
 });
 
 const HotelsPage = ({ route, navigation }) => {
@@ -94,7 +105,11 @@ const HotelsPage = ({ route, navigation }) => {
     getHotels();
   }
 
-  const onChangeSearch = (query) => setSearchQuery(query);
+  const onChangeSearch = (query) => {
+    setSearchQuery(query);
+    if (searchQuery == '') getHotelsByLocation();
+    else getHotels();
+  };
 
   return (
     <View>
@@ -110,7 +125,7 @@ const HotelsPage = ({ route, navigation }) => {
       <Searchbar
         placeholder="Search a location"
         onChangeText={onChangeSearch}
-        onSubmitEditing={getHotelsByLocation}
+        onSubmitEditing={searchQuery === '' ? getHotelsByLocation : getHotels}
         value={searchQuery}
       />
       <FlatList
