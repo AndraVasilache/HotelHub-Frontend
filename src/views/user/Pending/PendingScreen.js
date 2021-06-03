@@ -1,22 +1,29 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet, View, FlatList, Platform, TouchableOpacity,
+  StyleSheet, View, FlatList, Platform, TouchableOpacity, Text,
 } from 'react-native';
 import {
-  Card, Paragraph, Button,
+  Card, Paragraph,
 } from 'react-native-paper';
 import axios from 'axios';
 
 const styles = StyleSheet.create({
+  inputText: {
+    color: 'white',
+    fontFamily: 'Playfair',
+    fontSize: Platform.OS === 'web' ? 20 : 15,
+  },
   button: {
     backgroundColor: '#5c0099',
     borderRadius: 25,
     height: 50,
-    width: 300,
+    width: 200,
     alignItems: 'center',
+    alignSelf: 'center',
     justifyContent: 'center',
     marginBottom: 10,
-    fontFamily: 'Playfair',
+    marginTop: 20,
+    fontSize: 30,
   },
   container: {
     textAlign: 'center',
@@ -34,7 +41,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Pending = ({ route, navigation }) => {
+const Reservations = ({ route, navigation }) => {
   const user = (route && route.params && route.params.user) ? route.params.user : { email: '', password: '' };
   const [bookings, setBookings] = useState(false);
 
@@ -68,7 +75,9 @@ const Pending = ({ route, navigation }) => {
         style={styles.button}
         onPress={() => navigation.toggleDrawer()}
       >
-        Open drawer
+        <Text style={styles.inputText}>
+          Open menu
+        </Text>
       </TouchableOpacity>
       <View>
 
@@ -79,17 +88,18 @@ const Pending = ({ route, navigation }) => {
           renderItem={({ item }) => (
             <View style={styles.container}>
               <Card>
-                <Card.Title title={item.user_id} />
+                <Card.Title title="Reservation" />
                 <Card.Content>
                   <Paragraph>
                     {'\n'}
-                    start_date:
+                    Your reservation is yet to be approved!
+                    {'\n\n'}
+                    Start date:
+                    {new Date(item.start_date).toString()}
+                    {'.\n\n'}
+                    End date:
                     {' '}
-                    {item.start_date}
-                    {'\n'}
-                    end_date:
-                    {' '}
-                    {item.end_date}
+                    {new Date(item.end_date).toString()}
                     {'\n'}
                   </Paragraph>
                 </Card.Content>
@@ -102,4 +112,4 @@ const Pending = ({ route, navigation }) => {
   );
 };
 
-export default Pending;
+export default Reservations;

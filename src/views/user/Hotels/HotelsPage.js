@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet, View, FlatList, Text, Platform,
+  StyleSheet, View, FlatList, Text, Platform, TouchableOpacity,
 } from 'react-native';
 import {
   Searchbar, Card, Paragraph, Button,
@@ -24,6 +24,23 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'Playfair',
   },
+  inputText: {
+    color: 'white',
+    fontFamily: 'Playfair',
+    fontSize: Platform.OS === 'web' ? 20 : 15,
+  },
+  button: {
+    backgroundColor: '#5c0099',
+    borderRadius: 25,
+    height: 50,
+    width: 200,
+    alignItems: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+    marginTop: 20,
+    fontSize: 30,
+  },
 });
 
 const HotelsPage = ({ route, navigation }) => {
@@ -31,6 +48,26 @@ const HotelsPage = ({ route, navigation }) => {
   const [hotels, setHotels] = useState(false);
 
   const [searchQuery, setSearchQuery] = React.useState('');
+
+  function getHotelsByLocation() {
+    const options = {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },
+      params: {
+        location: searchQuery,
+      },
+    };
+
+    axios.get('https://hotelhubip.herokuapp.com/client/location/hotels', options)
+      .then((response) => {
+        setHotels(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   function getHotels() {
     const options = {
@@ -50,9 +87,6 @@ const HotelsPage = ({ route, navigation }) => {
   }
 
   function goToMakeReservation(hotelId) {
-    console.log(`aici}`);
-    console.log(user);
-    console.log(`aici`);
     navigation.navigate('MakeReservation', { hotelId, user });
   }
 
@@ -64,11 +98,19 @@ const HotelsPage = ({ route, navigation }) => {
 
   return (
     <View>
-      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.toggleDrawer()}
+      >
+        <Text style={styles.inputText}>
+          Open menu
+        </Text>
+      </TouchableOpacity>
 
       <Searchbar
         placeholder="Search a location"
         onChangeText={onChangeSearch}
+        onSubmitEditing={getHotelsByLocation}
         value={searchQuery}
       />
       <FlatList
