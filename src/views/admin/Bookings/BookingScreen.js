@@ -157,7 +157,6 @@ const Bookings = ({ route, navigation }) => {
                 <Card.Title title={`Room ${item.name}`} />
                 <Card.Content>
                   <Paragraph>
-                    {item.room_id}
                     {'\n'}
                     Booking start date:
                     {' '}

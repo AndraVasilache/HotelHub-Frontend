@@ -141,7 +141,7 @@ const HotelsPage = ({ route, navigation }) => {
                   {item.location}
                 </Paragraph>
               </Card.Content>
-              <Card.Cover source={{ uri: item.photo } || hotelImage} style={styles.image} resizeMode="center" />
+              {/* <Card.Cover source={{ uri: item.photo } || hotelImage} style={styles.image} resizeMode="center" /> */}
               <Card.Actions>
                 <Button onPress={() => goToMakeReservation(item.hotel_id)}>Make Reservation</Button>
               </Card.Actions>
