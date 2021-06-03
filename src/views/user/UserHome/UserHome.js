@@ -32,6 +32,11 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     fontFamily: 'Playfair',
   },
+  inputText: {
+    color: 'white',
+    fontFamily: 'Playfair',
+    fontSize: Platform.OS === 'web' ? 20 : 15,
+  },
 });
 
 let user;
@@ -68,8 +73,7 @@ function CustomDrawerContent(props) {
 
 const Drawer = createDrawerNavigator();
 
-const UserHome = ({ navigation, route }) => {
-  console.log(navigation);
+const UserHome = ({ route }) => {
   user = (route && route.params && route.params.user) ? route.params.user : { email: '', password: '' };
 
   return (

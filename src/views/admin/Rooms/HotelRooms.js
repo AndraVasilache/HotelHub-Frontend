@@ -3,7 +3,7 @@ import {
   StyleSheet, View, FlatList, Platform, TouchableOpacity,
 } from 'react-native';
 import {
-  Card, Paragraph, Button,
+  Card, Paragraph, Button, Text,
 } from 'react-native-paper';
 import axios from 'axios';
 import { Overlay } from 'react-native-elements';
@@ -20,12 +20,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 10,
     fontFamily: 'Playfair',
+    alignSelf: 'center',
+  },
+  inputText: {
+    color: 'white',
+    fontFamily: 'Playfair',
+    fontSize: Platform.OS === 'web' ? 20 : 15,
   },
   container: {
     textAlign: 'center',
     fontSize: 20,
     fontFamily: 'Playfair',
     paddingBottom: 10,
+    marginBottom: 12,
   },
   image: {
     backgroundColor: 'white',
@@ -101,16 +108,19 @@ const Rooms = ({ route, navigation }) => {
           style={styles.button}
           onPress={() => navigation.toggleDrawer()}
         >
-          Open drawer
+          <Text style={styles.inputText}>
+            Open menu
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.button}
           onPress={toggleOverlay}
         >
-          Add a new room
+          <Text style={styles.inputText}>
+            Add a new room
+          </Text>
         </TouchableOpacity>
-        <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
 
         {/* add a room modal */}
         <View>

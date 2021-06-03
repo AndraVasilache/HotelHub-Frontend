@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet, View, FlatList, Platform, TouchableOpacity,
+  StyleSheet, View, FlatList, TouchableOpacity, Text, Platform,
 } from 'react-native';
 import {
   Card, Paragraph, Button,
@@ -8,21 +8,12 @@ import {
 import axios from 'axios';
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#5c0099',
-    borderRadius: 25,
-    height: 50,
-    width: 300,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
-    fontFamily: 'Playfair',
-  },
   container: {
     textAlign: 'center',
     fontSize: 20,
     fontFamily: 'Playfair',
-    paddingBottom: 10,
+    paddingBottom: 50,
+    marginBottom: 30,
   },
   image: {
     backgroundColor: 'white',
@@ -31,6 +22,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     fontFamily: 'Playfair',
+  },
+  inputText: {
+    color: 'white',
+    fontFamily: 'Playfair',
+    fontSize: Platform.OS === 'web' ? 20 : 15,
+  },
+  button: {
+    backgroundColor: '#5c0099',
+    borderRadius: 25,
+    height: 50,
+    width: 200,
+    alignItems: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+    marginTop: 20,
+    fontSize: 30,
   },
 });
 
@@ -51,7 +59,30 @@ const Bookings = ({ route, navigation }) => {
 
     axios.get('https://hotelhubip.herokuapp.com/bookings/hotel/not_confirmed', options)
       .then((response) => {
-        setBookings(response.data);
+        const rawBookings = response.data;
+        console.log(response.data);
+
+        const promises = rawBookings.map((booking) => {
+          const roomOptions = {
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+            },
+            params: {
+              room_id: booking.room_id,
+            },
+          };
+          return axios.get('https://hotelhubip.herokuapp.com/bookings/rooms/get', roomOptions);
+        });
+        Promise.all(promises).then((rooms) => {
+          const finalBookings = [];
+          let i;
+          for (i = 0; i < rooms.length; i += 1) {
+            finalBookings.push({ ...rawBookings[i], ...rooms[i].data });
+          }
+
+          setBookings(finalBookings);
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -110,7 +141,9 @@ const Bookings = ({ route, navigation }) => {
         style={styles.button}
         onPress={() => navigation.toggleDrawer()}
       >
-        Open drawer
+        <Text style={styles.inputText}>
+          Open menu
+        </Text>
       </TouchableOpacity>
       <View>
 
@@ -121,17 +154,18 @@ const Bookings = ({ route, navigation }) => {
           renderItem={({ item }) => (
             <View style={styles.container}>
               <Card>
-                <Card.Title title={item.user_id} />
+                <Card.Title title={`Room ${item.name}`} />
                 <Card.Content>
                   <Paragraph>
+                    {item.room_id}
                     {'\n'}
-                    start_date:
+                    Booking start date:
                     {' '}
-                    {item.start_date}
-                    {'\n'}
-                    end_date:
+                    {new Date(item.start_date).toString()}
+                    {'\n\n'}
+                    Booking end date:
                     {' '}
-                    {item.end_date}
+                    {new Date(item.end_date).toString()}
                     {'\n'}
                   </Paragraph>
                 </Card.Content>

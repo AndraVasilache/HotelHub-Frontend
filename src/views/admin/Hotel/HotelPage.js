@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import {
-  View, StyleSheet,
+  View, StyleSheet, TouchableOpacity, Platform, Text,
 } from 'react-native';
 import {
-  Button, Card, Title, Paragraph,
+  Button, Card, Title,
 } from 'react-native-paper';
 import axios from 'axios';
 
@@ -20,6 +20,22 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     fontFamily: 'Playfair',
+  },
+  inputText: {
+    color: 'white',
+    fontFamily: 'Playfair',
+    fontSize: Platform.OS === 'web' ? 20 : 15,
+  },
+  button: {
+    backgroundColor: '#5c0099',
+    borderRadius: 25,
+    height: 50,
+    width: 200,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+    marginTop: 20,
+    fontSize: 30,
   },
 });
 
@@ -79,11 +95,18 @@ function HotelPage({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.toggleDrawer()}
+      >
+        <Text style={styles.inputText}>
+          Open menu
+        </Text>
+      </TouchableOpacity>
       <Card>
         <Card.Title title={hotel.name} subtitle={hotel.location} />
         <Card.Content>
-          <Title>Mama ce descriere</Title>
+          <Title>This is the hotel you are currently managing!</Title>
         </Card.Content>
         <Card.Cover source={hotel.photo || hotelImageMissing} />
         <Card.Actions>

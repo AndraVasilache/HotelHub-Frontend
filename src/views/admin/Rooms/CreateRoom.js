@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     fontSize: Platform.OS === 'android' ? 15 : 20,
     width: Platform.OS === 'android' ? '100%' : '80%',
     marginBottom: 10,
-    color: '#274650',
+    color: '#5c0099',
     backgroundColor: 'white',
     fontFamily: 'Playfair',
     alignItems: 'center',
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   button: {
-    backgroundColor: '#1F3B3F',
+    backgroundColor: '#5c0099',
     borderRadius: 25,
     height: 50,
     width: 200,

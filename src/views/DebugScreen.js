@@ -18,8 +18,6 @@ const styles = StyleSheet.create({
 
 const DebugScreen = ({ navigation }) => (
   <View>
-    <Text style={styles.fontTest}> Buna ziua !</Text>
-    <Text style={styles.fontTest2}> Buna seara !</Text>
     <Button
       title="StartScreen"
       onPress={() => navigation.navigate('Start')}
@@ -53,11 +51,6 @@ const DebugScreen = ({ navigation }) => (
     <Button
       title="Hotels"
       onPress={() => navigation.navigate('Hotels')}
-    />
-
-    <Button
-      title="Test"
-      onPress={() => navigation.navigate('Test')}
     />
 
   </View>

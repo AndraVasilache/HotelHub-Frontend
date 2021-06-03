@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import {
+  View, Text, Button, Platform, StyleSheet, ImageBackground, TouchableOpacity,
+} from 'react-native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -11,21 +13,66 @@ import HotelPage from '../Hotel/HotelPage';
 import Bookingscreen from '../Bookings/BookingScreen';
 import Rooms from '../Rooms/HotelRooms';
 
+const backgroundImage = require('../../../../assets/userHome.jpg');
+
+const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  defaultMessage: {
+    color: '#5c0099',
+    justifyContent: 'center',
+    fontSize: Platform.OS === 'web' ? 27 : 19,
+    height: 80,
+    lineHeight: 20,
+    alignSelf: 'stretch',
+    textAlign: 'center',
+    marginBottom: 30,
+    fontFamily: 'Playfair',
+  },
+  inputText: {
+    color: 'white',
+    fontFamily: 'Playfair',
+    fontSize: Platform.OS === 'web' ? 20 : 15,
+  },
+  button: {
+    backgroundColor: '#5c0099',
+    borderRadius: 25,
+    height: 50,
+    width: 200,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+    marginTop: 20,
+    fontSize: 30,
+  },
+});
+
 let user;
 
 function Feed({ navigation }) {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ fontSize: 24 }}>
-        Hi admin,
-        { ' ' }
-        {user.name}
-        { ' ' }
-        !
-      </Text>
-      <Text>Feed Screen</Text>
-      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
-    </View>
+    <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
+      <View style={styles.backgroundImage}>
+        <Text style={styles.defaultMessage}>
+          Hi,
+          { ' ' }
+          {user.name}
+          { ' ' }
+          ! What needs managing today?
+        </Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.toggleDrawer()}
+        >
+          <Text style={styles.inputText}>
+            Open menu
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
   );
 }
 
@@ -34,12 +81,8 @@ function CustomDrawerContent(props) {
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
       <DrawerItem
-        label="Close drawer"
+        label="Close menu"
         onPress={() => props.navigation.closeDrawer()}
-      />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => props.navigation.toggleDrawer()}
       />
     </DrawerContentScrollView>
   );
@@ -47,10 +90,8 @@ function CustomDrawerContent(props) {
 
 const Drawer = createDrawerNavigator();
 
-const AdminHome = ({ navigation, route }) => {
-  console.log(navigation);
+const AdminHome = ({ route }) => {
   user = (route && route.params && route.params.user) ? route.params.user : { email: '', password: '' };
-  console.log(user);
   return (
     <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} user={user} initialRouteName="UserHome" />}>
       <Drawer.Screen name="Feed" component={Feed} />
