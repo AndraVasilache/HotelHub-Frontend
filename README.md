@@ -29,7 +29,7 @@
 - Andra Vasilache - [AndraVasilache](https://github.com/AndraVasilache) - [vasilacheandragabriela@gmail.com]()
 - Ioan Tanasa - [tnsio](https://github.com/tnsio) - [ioan.tanasa99@gmail.com]()
 
-Project Link - [https://github.com/AndraVasilache/hotelhub_frontend](https://github.com/AndraVasilache/hotelhub_frontend)
+Project Link - [https://github.com/AndraVasilache/HotelHub-Frontend](https://github.com/AndraVasilache/HotelHub-Frontend)
 
 ---
 
